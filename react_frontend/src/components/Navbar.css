@@ -1,0 +1,52 @@
+.navbar {
+    background-color: blue;
+    width: 100%;
+    display: block;
+}
+.header{
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.left-section{
+  background-color: rgb(31, 31, 31);
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
+button{
+  display: flex;
+  background-color: rgb(31, 31, 31);
+  border: 0;
+  margin: 20px;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+}
+.middle-section{
+  display: flex;
+  background-color: rgb(31, 31, 31);
+  flex: 1;
+  align-items: center;
+  justify-content: space-around;
+}
+img{
+  width: 100px;
+  height: 100px;
+}
+.right-section{
+  background-color: rgb(31, 31, 31);
+  width: 500px;
+  display: flex;
+  justify-content: right;
+}
+button:hover{
+  background-color: rgb(215, 215, 215);
+  color: black;
+  border-radius: 100px;
+  transition: 0.3s;
+}

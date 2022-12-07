@@ -1,0 +1,19 @@
+body{
+    background-color: gray;
+    background-image: url(background.jpg);
+
+}
+.content{
+    display: flex;
+    justify-content: center;    
+}
+.gallery-photo{
+    vertical-align: top;
+    margin: 50px;
+    width: 102%;
+    height: 102%;
+    border-radius: 20px;
+    border: solid;
+    border-width: 8px;
+    border-color: rgb(31, 31, 31);
+}
