@@ -2,10 +2,10 @@ import React,{ useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import photo1 from "./interior restaurant1.jpg"
 import photo2 from "./interior restuarant2.jpeg"
-import './Home.css'
+import './HomePage.css'
 
-function Home(){
-   const [name, setName] = useState('juzek');
+function HomePage(){
+
    const [backendData, setBackendData] = useState(null)
 
    useEffect(() => {
@@ -17,14 +17,6 @@ function Home(){
       console.log(backendData)
    }, [])
     
-   function changeName(){
-      setName('Maciek')
-   }
-   function backName(){
-      setName('dupa')
-   }
-     
-
    return(
       <div>
          <Navbar/>
@@ -36,4 +28,4 @@ function Home(){
    )
 }
 
-export default Home;
+export default HomePage;
