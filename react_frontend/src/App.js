@@ -1,10 +1,11 @@
 import './App.css';
 import {useState, useEffect} from 'react'
-
-
+import {Route, Routes, BrowserRouter} from 'react-router-dom'
+import HomePage from './pages/HomePage';
+ 
 function App() {
   
-  const [backendData, setBackendData] = useState([{}])
+  const [backendData, setBackendData] = useState(null)
 
   useEffect(() => {
     fetch("/api").then(
@@ -17,9 +18,11 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      {(typeof backendData.siema)}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path='/' element={<HomePage/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

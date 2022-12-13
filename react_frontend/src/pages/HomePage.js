@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import photo1 from "./interior restaurant1.jpg"
-import photo2 from "./interior restuarant2.jpeg"
+import photo1 from "../assets/interior_restaurant1.jpg"
+import photo2 from "../assets/interior_restuarant2.jpeg"
 import './HomePage.css'
 
 function HomePage(){
@@ -9,12 +9,14 @@ function HomePage(){
    const [backendData, setBackendData] = useState(null)
 
    useEffect(() => {
-      fetch("http://localhost:5000/api").then(
+      fetch("/api").then(
          res => res.json()
       ).then(
-         data => setBackendData(data)
+         data => {
+            setBackendData(data)
+            console.log(data)
+         }
       )
-      console.log(backendData)
    }, [])
     
    return(

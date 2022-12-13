@@ -1,5 +1,5 @@
 import './Navbar.css'
-import logo from './restaurant icon.jpg'
+import logo from '../assets/restaurant_icon.jpg'
 
 
 function Navbar() {
