@@ -9,7 +9,7 @@ function HomePage(){
    const [backendData, setBackendData] = useState(null)
 
    useEffect(() => {
-      fetch("/api").then(
+      fetch("/api/auth").then(
          res => res.json()
       ).then(
          data => {
