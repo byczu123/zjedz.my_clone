@@ -1,9 +1,9 @@
 import express from "express";
-import { authResponse, registerResponse } from "../controllers/user.js";
+import {register, test} from "../controllers/user.js";
 
 const router = express.Router()
 
-router.get('/', authResponse)
-router.get('/register', registerResponse)
+router.post('/register', register)
+router.get('/test', test)
 
 export default router
