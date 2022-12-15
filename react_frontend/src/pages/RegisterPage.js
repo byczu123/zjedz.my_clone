@@ -1,18 +1,18 @@
 import React from 'react'
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div>
         <h1>
-            Login
+            Register
         </h1>
         <form method='POST'>
             <input name="email" placeholder="email"></input>
             <input name="password" placeholder="password"></input>
-            <button type="submit">Log in</button>
+            <button type="submit">Register</button>
         </form>
     </div>
   )
 }
 
-export default LoginPage
+export default RegisterPage

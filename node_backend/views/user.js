@@ -1,8 +1,9 @@
 import express from "express";
-import { authResponse } from "../controllers/auth.js";
+import { authResponse, registerResponse } from "../controllers/user.js";
 
 const router = express.Router()
 
 router.get('/', authResponse)
+router.get('/register', registerResponse)
 
 export default router
