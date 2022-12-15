@@ -8,16 +8,16 @@ function HomePage(){
 
    const [backendData, setBackendData] = useState(null)
 
-   useEffect(() => {
-      fetch("/api/auth").then(
-         res => res.json()
-      ).then(
-         data => {
-            setBackendData(data)
-            console.log(data)
-         }
-      )
-   }, [])
+   // useEffect(() => {
+   //    fetch("/").then(
+   //       res => res.json()
+   //    ).then(
+   //       data => {
+   //          setBackendData(data)
+   //          console.log(data)
+   //       }
+   //    )
+   // }, [])
     
    return(
       <div>
