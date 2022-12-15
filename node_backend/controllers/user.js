@@ -3,9 +3,10 @@ import { db } from "../db.js"
 export const register = (req, res) => {
     const email = req.body.email
     const password = req.body.password
+    const username = req.body.username
     
     if (password && email) {
-        console.log(email, password)
+        // console.log(username, email, password)
         // const data = {
         //     email: email, 
         //     password: password
@@ -13,7 +14,7 @@ export const register = (req, res) => {
         // const dataJSON = JSON.stringify(data)
         // res.send(dataJSON)
 
-        const sql = `INSERT INTO user (email, username, password_hash) VALUES ('${email}', 'user', '${password}');`
+        const sql = `INSERT INTO user (email, username, password_hash) VALUES ('${email}', '${username}', '${password}');`
         console.log(sql)
         db.query(sql, (error, results) => {
             if (error) {

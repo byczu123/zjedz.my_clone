@@ -1,7 +1,6 @@
 import './Navbar.css'
 import logo from '../assets/restaurant_icon.jpg'
 
-
 function Navbar() {
     return(
         <div className="header">
