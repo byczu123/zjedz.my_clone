@@ -29,7 +29,7 @@ const RegisterPage = () => {
       if (res.status === 200) return res.json()
     })
     .then(data => {
-      console.log('Mam dane', data)
+      console.log(data)
     })
   }
   
