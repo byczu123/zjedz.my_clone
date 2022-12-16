@@ -1,5 +1,6 @@
 import { db } from "../db.js"
-import { hashPassword, correctEmail } from "../utils.js"
+import { hashPassword, correctEmail, usernameExists, comparePaswords } from "../utils.js"
+import jwt from "jsonwebtoken"
 
 export const register = (req, res) => {
     const email = req.body.email
@@ -15,6 +16,8 @@ export const register = (req, res) => {
         return
     }
     if (username && email && password) {
+        // const userExists = await usernameExists(username)
+        // if(userExists) res.send({message: "Siuu"})
         hashPassword(password)
         .then(hashedPassword => {
             const sql = `INSERT INTO user (email, username, password_hash) VALUES ('${email}', '${username}', '${hashedPassword}');`
@@ -46,7 +49,38 @@ export const register = (req, res) => {
     // res.send(dataJSON)
 }
 
-
-export const test = (req, res) => {
-    res.send("Siema!")
+export const login = (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+    
+    if (!(email && password)) {
+        res.send({message: "Missing data. Please try again"})
+        return
+    }
+    const sql = `SELECT * FROM user WHERE email = '${email}'`
+    console.log(sql)
+    db.query(sql, (error, results) => {
+        if (error) {
+            console.log(error)
+            res.send({message: "Wystąpił błąd"})
+            return
+        }
+        if (results.length === 0) {
+            res.send({message: "Dane nieprawidłowe"})
+            return
+        }
+        results.map(result => {
+            const hashedPassword = result.password_hash
+            console.log(hashedPassword)
+            comparePaswords(password, hashedPassword)
+            .then(result => {
+                if (result) {
+                    res.send({message: "Użytkownik zalogowany pomyślnie"})
+                }
+                else {
+                    res.send({message: "Dane nieprawidłowe"})
+                }
+            })
+        })
+    })
 }

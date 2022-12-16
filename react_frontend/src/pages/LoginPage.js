@@ -1,16 +1,43 @@
 import React from 'react'
+import { useRef } from 'react'
 
 const LoginPage = () => {
+  
+  const emailInput = useRef()
+  const passwordInput = useRef()
+  
+  const submitLogin = () => {
+    const email = emailInput.current.value
+    const password = passwordInput.current.value
+
+    const options = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    }
+
+    fetch('auth/login', options)
+    .then(res => {
+      if (res.status === 200) return res.json()
+    })
+    .then(data => {
+      console.log(data)
+    })
+  }
+
   return (
     <div>
-        <h1>
-            Login
-        </h1>
-        <form method='POST'>
-            <input name="email" placeholder="email"></input>
-            <input name="password" placeholder="password"></input>
-            <button type="submit">Log in</button>
-        </form>
+      <h1>
+        Login
+      </h1>
+      <input name="email" placeholder="email" type="text" ref={emailInput}></input>
+      <input name="password" placeholder="password" type="password" ref={passwordInput}></input>
+      <button onClick={submitLogin}>Log in</button>
     </div>
   )
 }
