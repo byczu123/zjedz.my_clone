@@ -1,8 +1,9 @@
 import authRoutes from "./views/user.js"
 import express from "express"
 import cors from "cors"
-import { db } from "./db.js"
+import cookieParser from "cookie-parser"
 import bodyParser from "body-parser"
+import { db } from "./db.js"
 
 const app = express()
 
@@ -14,6 +15,7 @@ db.connect( error => {
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use('/auth', authRoutes)
 
 app.listen(5000, () => console.log('Server has started (port 5000)'))

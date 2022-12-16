@@ -4,8 +4,20 @@ import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
- 
+import Cookies from 'js-cookie'
+
 function App() {
+
+  const [token, setToken] = useState(null)
+
+  useEffect(() => {
+    const tokenFromCookie = Cookies.get('token')
+    if (tokenFromCookie) {
+      sessionStorage.setItem('token', tokenFromCookie)
+      setToken(tokenFromCookie)
+    }
+    console.log('Zsynchronizowano token w sessionStorage z ciasteczkiem', sessionStorage.getItem('token'))
+  }, [])
 
   return (
     <BrowserRouter>

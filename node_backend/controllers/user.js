@@ -86,6 +86,7 @@ export const login = (req, res) => {
                         expiresIn: '1h'
                     }
                     const token = jwt.sign(payload, secret, options)
+                    res.cookie('token', token) // ustawienie ciasteczka
                     res.send({
                         token: token,
                         message: "Użytkownik zalogowany pomyślnie"
