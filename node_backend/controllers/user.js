@@ -1,5 +1,5 @@
 import { db } from "../db.js"
-import { hashPassword, correctEmail, usernameExists, comparePaswords } from "../utils.js"
+import { hashPassword, correctEmail, comparePaswords } from "../utils.js"
 import jwt from "jsonwebtoken"
 
 export const register = (req, res) => {
@@ -71,11 +71,25 @@ export const login = (req, res) => {
         }
         results.map(result => {
             const hashedPassword = result.password_hash
-            console.log(hashedPassword)
+            // console.log(hashedPassword)
             comparePaswords(password, hashedPassword)
-            .then(result => {
-                if (result) {
-                    res.send({message: "Użytkownik zalogowany pomyślnie"})
+            .then(comparison => {
+                if (comparison) {
+                    const secret = process.env.JWT_SECRET
+                    console.log(secret)
+                    const payload = {
+                        id: result.id,
+                        username: result.username,
+                        email: result.email,
+                    }
+                    const options = {
+                        expiresIn: '1h'
+                    }
+                    const token = jwt.sign(payload, secret, options)
+                    res.send({
+                        token: token,
+                        message: "Użytkownik zalogowany pomyślnie"
+                    })
                 }
                 else {
                     res.send({message: "Dane nieprawidłowe"})

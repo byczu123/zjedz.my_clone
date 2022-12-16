@@ -27,6 +27,8 @@ const LoginPage = () => {
     })
     .then(data => {
       console.log(data)
+      sessionStorage.setItem("token", data.token)
+      // console.log(sessionStorage.getItem("token"))
     })
   }
 
