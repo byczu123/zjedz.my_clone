@@ -1,4 +1,5 @@
 import authRoutes from "./views/user.js"
+import restaurantRoutes from "./views/restaurants.js"
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
@@ -16,6 +17,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 app.use(cookieParser())
+
 app.use('/auth', authRoutes)
+app.use('/restaurants', restaurantRoutes)
 
 app.listen(5000, () => console.log('Server has started (port 5000)'))
