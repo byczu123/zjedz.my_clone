@@ -15,8 +15,9 @@
   width: 500px;
   justify-content: space-between;
 }
-button{
+.link{
   display: flex;
+  text-decoration: none;
   background-color: rgb(31, 31, 31);
   border: 0;
   margin: 20px;
@@ -44,7 +45,7 @@ img{
   display: flex;
   justify-content: right;
 }
-button:hover{
+.link:hover{
   background-color: rgb(215, 215, 215);
   color: black;
   border-radius: 100px;
