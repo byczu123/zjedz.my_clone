@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
 const RestaurantPage = () => {
   
@@ -8,17 +8,17 @@ const RestaurantPage = () => {
   
   const name = location.state && location.state.name
   const restaurantId = params && params.restaurant_id
+  const menuId = location.state && location.state.menuId
   
-  const [menu, setMenu] = useState([]);
-  
-  useEffect(() => {
-    console.log(restaurantId)
-    console.log(name)
-  }, [])
-
   return (
     <div>
-      <h1>Id restauracji: {restaurantId}, nazwa: {name}</h1>
+      <h1>Id restauracji: {restaurantId}, nazwa: {name}, Id menu: {menuId}</h1>
+      <Link 
+      to={`/restaurant/${restaurantId}/menu`} 
+      state={{
+        menuId: menuId}}>
+          Menu
+      </Link>
     </div>
   )
 }

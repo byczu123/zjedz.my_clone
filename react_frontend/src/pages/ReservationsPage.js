@@ -26,7 +26,9 @@ const ReservationsPage = () => {
                 <h1 >{restaurant.restaurant_id} {restaurant.name}</h1>
                 <Link 
                 to={`/restaurant/${restaurant.restaurant_id}`} 
-                state={{name: restaurant.name}}>Strona restauracji
+                state={{
+                    name: restaurant.name,
+                    menuId: restaurant.menu_id}}>Strona restauracji
                 </Link>
                 </div>
         })}
