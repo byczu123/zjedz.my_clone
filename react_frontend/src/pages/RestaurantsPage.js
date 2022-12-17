@@ -1,13 +1,13 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const ReservationsPage = () => {
+const RestaurantsPage = () => {
 
     const [restaurants, setRestaurants] = useState([])
 
     useEffect(() => {
         
-        fetch('/restaurants/get')
+        fetch('/restaurant/get')
         .then(res => {
             if (res.status === 200) return res.json()
         })
@@ -36,4 +36,4 @@ const ReservationsPage = () => {
   )
 }
 
-export default ReservationsPage
+export default RestaurantsPage

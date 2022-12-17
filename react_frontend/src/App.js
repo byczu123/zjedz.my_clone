@@ -4,7 +4,7 @@ import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
-import ReservationsPage from './pages/ReservationsPage';
+import RestaurantsPage from './pages/RestaurantsPage';
 import Cookies from 'js-cookie'
 import RestaurantPage from './pages/RestaurantPage';
 import MenuPage from './pages/MenuPage';
@@ -28,7 +28,7 @@ function App() {
         <Route exact path='/' element={<HomePage/>}/>
         <Route exact path='/register' element={<RegisterPage/>}/>
         <Route exact path='/login' element={<LoginPage/>}/>
-        <Route exact path='/reservations' element={<ReservationsPage/>}/>
+        <Route exact path='/restaurants' element={<RestaurantsPage/>}/>
         <Route exact path='/restaurant/:restaurant_id' element={<RestaurantPage/>}/>
         <Route exact path='/restaurant/:restaurant_id/menu' element={<MenuPage/>}/>
       </Routes>
