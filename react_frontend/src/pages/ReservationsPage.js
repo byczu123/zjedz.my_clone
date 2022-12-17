@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ReservationsPage = () => {
 
-    const [restaurants, setRestaurants] = useState(['siema'])
+    const [restaurants, setRestaurants] = useState([])
 
     useEffect(() => {
         
@@ -24,9 +24,11 @@ const ReservationsPage = () => {
         {restaurants.map((restaurant, index) => {
             return <div key={index}>
                 <h1 >{restaurant.restaurant_id} {restaurant.name}</h1>
-                <Link to='/'>Strona restauracji</Link>  
+                <Link 
+                to={`/restaurant/${restaurant.restaurant_id}`} 
+                state={{name: restaurant.name}}>Strona restauracji
+                </Link>
                 </div>
-            
         })}
     </div>
   )

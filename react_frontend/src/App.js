@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ReservationsPage from './pages/ReservationsPage';
 import Cookies from 'js-cookie'
+import RestaurantPage from './pages/RestaurantPage';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route exact path='/register' element={<RegisterPage/>}/>
         <Route exact path='/login' element={<LoginPage/>}/>
         <Route exact path='/reservations' element={<ReservationsPage/>}/>
+        <Route exact path='/restaurant/:restaurant_id' element={<RestaurantPage/>}/>
       </Routes>
     </BrowserRouter>
   );
