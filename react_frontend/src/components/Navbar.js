@@ -7,7 +7,7 @@ function Navbar() {
         <div className="header">
             <div className='left-section'>
                 <Link className='link' >Our restaurants</Link >
-                <Link className='link'>Make a reservation</Link >
+                <Link to='/restaurants' className='link'>Make a reservation</Link >
                 <Link className='link'>Gallery</Link >
             </div>
             <div className='middle-section'>
