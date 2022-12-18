@@ -1,13 +1,17 @@
 body{
     background-color: gray;
     background-image: url(../assets/background.jpg);
-
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .content{
     display: flex;
     justify-content: center;    
 }
 .gallery-photo{
+    min-width: 400px;
     vertical-align: top;
     margin: 50px;
     width: 102%;

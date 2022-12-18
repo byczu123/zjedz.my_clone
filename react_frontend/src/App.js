@@ -1,5 +1,5 @@
 import './App.css';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
@@ -8,18 +8,22 @@ import RestaurantsPage from './pages/RestaurantsPage';
 import Cookies from 'js-cookie'
 import RestaurantPage from './pages/RestaurantPage';
 import MenuPage from './pages/MenuPage';
+import { Context } from './context/appContext';
+import { decodeToken } from "react-jwt"
+import injectContext from './context/appContext';
 
 function App() {
-
-  const [token, setToken] = useState(null)
-
+  
+  const {store, actions} = useContext(Context)
+  const token = Cookies.get('token')
+  
   useEffect(() => {
-    const tokenFromCookie = Cookies.get('token')
-    if (tokenFromCookie) {
-      sessionStorage.setItem('token', tokenFromCookie)
-      setToken(tokenFromCookie)
+    const decodedToken = decodeToken(token)
+    if (decodedToken) {
+      actions.setUserData(decodedToken.username, decodedToken.email)
+      console.log('Store set')
     }
-    console.log('Zsynchronizowano token w sessionStorage z ciasteczkiem', sessionStorage.getItem('token'))
+    console.log(store.username, store.email)
   }, [])
 
   return (
@@ -36,4 +40,4 @@ function App() {
   );
 }
 
-export default App;
+export default injectContext(App);

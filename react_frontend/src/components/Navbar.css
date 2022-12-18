@@ -15,14 +15,15 @@
   width: 500px;
   justify-content: space-between;
 }
-button{
+.link{
   display: flex;
+  text-decoration: none;
   background-color: rgb(31, 31, 31);
   border: 0;
   margin: 20px;
   align-items: center;
   color: white;
-  font-size: 20px;
+  font-size:150%;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: bold;
   font-style: italic;
@@ -37,6 +38,10 @@ button{
 img{
   width: 100px;
   height: 100px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .right-section{
   background-color: rgb(31, 31, 31);
@@ -44,7 +49,7 @@ img{
   display: flex;
   justify-content: right;
 }
-button:hover{
+.link:hover{
   background-color: rgb(215, 215, 215);
   color: black;
   border-radius: 100px;
