@@ -48,9 +48,11 @@ const LoginPage = () => {
       const email = data.email && data.email
       const decodedToken = decodeToken(token)
       console.log(decodedToken)
-      if (decodedToken.username === username && decodedToken.email === email) {
-        actions.setUserData(username, email)
-        navigate('/')
+      if (decodedToken) {
+        if (decodedToken.username === username && decodedToken.email === email) {
+          actions.setUserData(username, email)
+          navigate('/')
+        }
       }
       //sessionStorage.setItem("token", data.token)
       // console.log(sessionStorage.getItem("token"))

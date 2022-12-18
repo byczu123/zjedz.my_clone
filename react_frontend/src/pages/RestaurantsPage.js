@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useJwt } from "react-jwt"
+import { decodeToken } from "react-jwt"
 import Cookies from 'js-cookie';
 import { Context } from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,14 @@ const RestaurantsPage = () => {
     const [restaurants, setRestaurants] = useState([])
     
     useEffect(() => {
-        console.log(store.username, store.email)
-        if (!(store.username && store.email)) navigate('/login')
+        const token = Cookies.get('token')
+        const decodedToken = decodeToken(token)
+        if (decodedToken) {
+            actions.setUserData({username: decodedToken.username, email: decodedToken.email})
+            console.log(decodedToken)
+        } else {
+            navigate('/login')
+        }
     }, [])
     
     useEffect(() => {
