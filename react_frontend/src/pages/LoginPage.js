@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRef } from 'react'
+import './RegisterPage.css'
 
 const LoginPage = () => {
   
@@ -34,7 +35,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
+    <div className='container'>
       <h1>
         Login
       </h1>

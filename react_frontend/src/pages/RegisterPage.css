@@ -1,0 +1,46 @@
+
+
+.container{
+    background-color: rgb(196, 192, 192);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8%;  
+    max-width: 25%;
+    display: flex;
+    border: 1px solid;
+    border-radius: 2%;
+    flex-direction: column;
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-style: italic;
+    box-shadow: 10px 10px;
+    width: 50%;
+}
+input{
+    background-color: beige;
+    border: 1px;
+    border-radius: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    padding: 10px;
+    margin: 5%;
+    width: 50%;
+    display: block;
+    transition: ease-in-out, width 0.35s ease-in-out;
+
+}
+input:focus {
+    width: 58%;
+
+}
+button{
+    background-color: rgb(219, 235, 233) ;
+    margin-top: 30px;
+    width: 30%;
+    cursor: pointer;
+    margin-bottom: 50px;
+    box-shadow: 0 3px #999;
+
+}
+

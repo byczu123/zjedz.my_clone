@@ -2,7 +2,6 @@ import './Navbar.css'
 import logo from '../assets/restaurant_icon.jpg'
 import {Link} from 'react-router-dom'
 
-
 function Navbar() {
     return(
         <div className="header">

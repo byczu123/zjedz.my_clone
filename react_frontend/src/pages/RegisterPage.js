@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRef } from 'react'
+import './RegisterPage.css'
 
 const RegisterPage = () => {
   
@@ -34,15 +35,15 @@ const RegisterPage = () => {
   }
   
   return (
-    <div>
-        <h1>
-            Register
-        </h1>
-        <input name="username" placeholder="username" type="text" ref={usernameInput}></input>
-        <input name="email" placeholder="email" type="text" ref={emailInput}></input>
-        <input name="password" placeholder="password" type="password" ref={passwordInput}></input>
-        <button onClick={submitRegistration}>Register</button>
-    </div>
+        <div className='container'>
+              <h1>
+                  Register
+              </h1>
+              <input name="username" placeholder="Username" type="text" ref={usernameInput}></input>
+              <input name="email" placeholder="E-mail" type="text" ref={emailInput}></input>
+              <input name="password" placeholder="Password" type="password" ref={passwordInput}></input>
+              <button onClick={submitRegistration}>Confirm</button>
+        </div>
   )
 }
 
