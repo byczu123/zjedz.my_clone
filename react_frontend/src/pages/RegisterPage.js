@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import './RegisterPage.css'
 
 const RegisterPage = () => {
@@ -7,6 +7,7 @@ const RegisterPage = () => {
   const emailInput = useRef()
   const passwordInput = useRef()
   const usernameInput = useRef()
+  const [message, setMessage] = useState(null)
 
   const submitRegistration = () => {
     const username = usernameInput.current.value
@@ -31,14 +32,18 @@ const RegisterPage = () => {
     })
     .then(data => {
       console.log(data)
+      setMessage(data.message)
     })
   }
   
   return (
         <div className='container'>
-              <h1>
-                  Register
-              </h1>
+              <h1>Register</h1>
+              {message ?(
+                <p>{message}</p>
+              ) :(
+                <p></p>
+              )}
               <input name="username" placeholder="Username" type="text" ref={usernameInput}></input>
               <input name="email" placeholder="E-mail" type="text" ref={emailInput}></input>
               <input name="password" placeholder="Password" type="password" ref={passwordInput}></input>

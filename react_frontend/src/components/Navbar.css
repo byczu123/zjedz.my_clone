@@ -23,7 +23,7 @@
   margin: 20px;
   align-items: center;
   color: white;
-  font-size: 20px;
+  font-size:150%;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: bold;
   font-style: italic;
@@ -38,6 +38,10 @@
 img{
   width: 100px;
   height: 100px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .right-section{
   background-color: rgb(31, 31, 31);
