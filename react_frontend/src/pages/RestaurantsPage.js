@@ -1,12 +1,22 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useJwt } from "react-jwt"
+import Cookies from 'js-cookie';
+import { Context } from '../context/appContext';
+import { useNavigate } from 'react-router-dom';
 
 const RestaurantsPage = () => {
 
+    const navigate = useNavigate()
+    const {store, actions} = useContext(Context)
     const [restaurants, setRestaurants] = useState([])
-
+    
     useEffect(() => {
-        
+        console.log(store.username, store.email)
+        if (!(store.username && store.email)) navigate('/login')
+    }, [])
+    
+    useEffect(() => {
         fetch('/restaurant/get')
         .then(res => {
             if (res.status === 200) return res.json()
@@ -17,8 +27,7 @@ const RestaurantsPage = () => {
             console.log('Ustawiono restauracje')
         })
     }, []);
-    
-  
+
     return (
     <div>
         {restaurants.map((restaurant, index) => {

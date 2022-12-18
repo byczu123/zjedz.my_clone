@@ -9,22 +9,22 @@ import Cookies from 'js-cookie'
 import RestaurantPage from './pages/RestaurantPage';
 import MenuPage from './pages/MenuPage';
 import { Context } from './context/appContext';
-import { useJwt } from "react-jwt"
+import { decodeToken } from "react-jwt"
 import injectContext from './context/appContext';
 
 function App() {
   
   const {store, actions} = useContext(Context)
   const token = Cookies.get('token')
-  const {decodedToken, isExpired} = useJwt(token)
   
   useEffect(() => {
+    const decodedToken = decodeToken(token)
     if (decodedToken) {
       actions.setUserData(decodedToken.username, decodedToken.email)
       console.log('Store set')
     }
     console.log(store.username, store.email)
-  }, [decodedToken])
+  }, [])
 
   return (
     <BrowserRouter>

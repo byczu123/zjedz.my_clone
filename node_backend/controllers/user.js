@@ -89,6 +89,8 @@ export const login = (req, res) => {
                     res.cookie('token', token) // ustawienie ciasteczka
                     res.send({
                         token: token,
+                        username: result.username,
+                        email: result.email,
                         message: "Użytkownik zalogowany pomyślnie"
                     })
                 }
