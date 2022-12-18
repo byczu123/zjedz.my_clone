@@ -1,8 +1,25 @@
-import { React, useState, useEffect } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { React, useState, useEffect, useContext } from 'react'
+import { Link, useLocation, useParams, useNavigate } from 'react-router-dom'
+import { Context } from '../context/appContext'
+import { decodeToken } from 'react-jwt'
+import Cookies from 'js-cookie'
 
 const RestaurantPage = () => {
   
+  const navigate = useNavigate()
+  const {store, actions} = useContext(Context)
+  
+  useEffect(() => {
+    const token = Cookies.get('token')
+    const decodedToken = decodeToken(token)
+    if (decodedToken) {
+      actions.setUserData({username: decodedToken.username, email: decodedToken.email})
+      console.log(decodedToken)
+    } else {
+      navigate('/login')
+    }
+  }, [])
+
   const params = useParams()
   const location = useLocation()
   
