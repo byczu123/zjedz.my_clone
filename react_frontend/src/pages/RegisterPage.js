@@ -44,7 +44,7 @@ const RegisterPage = () => {
               ) :(
                 <p></p>
               )}
-              <input name="username" placeholder="Username" type="text" ref={usernameInput}></input>
+                <input name="username" placeholder="Username" type="text" ref={usernameInput}></input>
               <input name="email" placeholder="E-mail" type="text" ref={emailInput}></input>
               <input name="password" placeholder="Password" type="password" ref={passwordInput}></input>
               <button onClick={submitRegistration}>Confirm</button>
