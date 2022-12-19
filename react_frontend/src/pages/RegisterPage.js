@@ -1,13 +1,28 @@
 import React from 'react'
-import { useRef, useState } from 'react'
+import { useRef, useState, useContext, useEffect } from 'react'
 import './RegisterPage.css'
+import { useNavigate } from 'react-router-dom'
+import { Context } from '../context/appContext'
 
 const RegisterPage = () => {
-  
+
+  const navigate = useNavigate()
+  const {store, actions} = useContext(Context)
+
   const emailInput = useRef()
   const passwordInput = useRef()
   const usernameInput = useRef()
+  
   const [message, setMessage] = useState(null)
+
+  console.log('RegisterPage rendered. Store: ', store.email, store.username)
+  
+  useEffect(() => {
+    if (store.email && store.username) {
+      navigate('/')
+      console.log('Redirected from RegisterPage to HomePage')
+    }
+  }, [store.email, store.username])
 
   const submitRegistration = () => {
     const username = usernameInput.current.value
@@ -33,6 +48,9 @@ const RegisterPage = () => {
     .then(data => {
       console.log(data)
       setMessage(data.message)
+      if(data.message === 'Użytkownik zalogowany pomyślnie') {
+        navigate('/login')
+      }
     })
   }
   

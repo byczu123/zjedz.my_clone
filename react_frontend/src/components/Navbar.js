@@ -9,7 +9,7 @@ function Navbar() {
     const {store, actions} = useContext(Context)
     
     console.log('Navbar rendered. Store: ', store.email, store.username)
-
+    
     return(
         <div className="header">
             <div className='left-section'>
@@ -20,12 +20,18 @@ function Navbar() {
             <div className='middle-section'>
                 <img src={logo}></img>
             </div>
+            {
+            store.email && store.username ? 
+            <div className='right-section'>
+                <h2>{store.username}</h2>
+                <button onClick={actions.logout}>Log out</button>
+            </div> 
+            :
             <div className='right-section'>
                 <Link className='link' to="/register">Register</Link>
                 <Link className='link' to="/login">Log in</Link>
-                <h2>{store.email}</h2>
-                <h2>{store.username}</h2>
             </div>
+            }
 	    </div>
     )
 };

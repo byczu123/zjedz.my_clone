@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Navbar from "../components/Navbar";
 import photo1 from "../assets/interior_restaurant1.jpg"
 import photo2 from "../assets/interior_restuarant2.jpeg"
 import './HomePage.css'
-import { useNavigate } from "react-router-dom";
 import { Context } from "../context/appContext";
-import Cookies from "js-cookie";
-import { decodeToken } from "react-jwt";
+
 
 function HomePage(){
 

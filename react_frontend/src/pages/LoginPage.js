@@ -51,7 +51,7 @@ const LoginPage = () => {
         const username = data.username
         const email = data.email
         console.log('Call setUserData in LoginPage')
-        actions.setUserData(username, email)
+        actions.setUserData(email, username)
         navigate('/')
       }
     })

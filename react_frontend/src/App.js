@@ -24,7 +24,7 @@ function App() {
       const decodedToken = decodeToken(token)
       if (decodedToken) {
         console.log('Call setUserData in app')
-        actions.setUserData(decodedToken.username, decodedToken.email)
+        actions.setUserData(decodedToken.email, decodedToken.username)
       }
     }
     validateToken()
