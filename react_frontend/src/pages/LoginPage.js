@@ -1,29 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useRef } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { Context } from '../context/appContext'
 import { decodeToken } from 'react-jwt'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 const LoginPage = () => {
   
-  const navigate = useNavigate()
   const {store, actions} = useContext(Context)
+  const [message, setMessage] = useState(null)
+  
+  const navigate = useNavigate()
+  
   const emailInput = useRef()
   const passwordInput = useRef()
-  const [message, setMessage] = useState(null)
+  
+  console.log('LoginPage rendered. Store: ', store.email, store.username)
 
-  
-  
   useEffect(() => {
-    const token = Cookies.get('token')
-    const decodedToken = decodeToken(token)
-    if (decodedToken) {
-      actions.setUserData({username: decodedToken.username, email: decodedToken.email})
-      console.log(decodedToken)
-      navigate('/')
+    if(store.email && store.username) {
+      console.log('LoginPage ckeck if store exists: true')
+      navigate('/') 
+    } else {
+      console.log('LoginPage ckeck if store exists: false')
     }
-  }, [])
+  }, [store.username, store.email])
 
   const submitLogin = () => {
     const email = emailInput.current.value
@@ -45,23 +45,15 @@ const LoginPage = () => {
       if (res.status === 200) return res.json()
     })
     .then(data => {
-      console.log(data)
+      console.log('Data from backend: ', data)
       setMessage(data.message)
-      
-      sessionStorage.setItem("token", data.token)
-      const token = data.token && data.token
-      const username = data.username && data.username
-      const email = data.email && data.email
-      const decodedToken = decodeToken(token)
-      console.log(decodedToken)
-      if (decodedToken) {
-        if (decodedToken.username === username && decodedToken.email === email) {
-          actions.setUserData(username, email)
-          navigate('/')
-        }
+      if (data.token) {
+        const username = data.username
+        const email = data.email
+        console.log('Call setUserData in LoginPage')
+        actions.setUserData(email, username)
+        navigate('/')
       }
-      //sessionStorage.setItem("token", data.token)
-      // console.log(sessionStorage.getItem("token"))
     })
   }
 

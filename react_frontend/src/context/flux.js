@@ -10,13 +10,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					email: email,
 					username: username
 				})
+				console.log('Store set. Values: ', 'email:', email, 'username:', username)
 			},
-			resetStore: () => {
+			logout: () => {
+				const Cookies = require("js-cookie")
+				Cookies.remove('token')
 				setStore({
 					email: null,
 					username: null
 				})
-				console.log('Store reset')
+				console.log('Logged out. Store reset, cookie removed')
 			}
 		}
 	};
