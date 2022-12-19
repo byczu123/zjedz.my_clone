@@ -1,27 +1,22 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 import photo1 from "../assets/interior_restaurant1.jpg"
 import photo2 from "../assets/interior_restuarant2.jpeg"
 import './HomePage.css'
+import { useNavigate } from "react-router-dom";
+import { Context } from "../context/appContext";
+import Cookies from "js-cookie";
+import { decodeToken } from "react-jwt";
 
 function HomePage(){
 
-   const [backendData, setBackendData] = useState(null)
+   const {store, actions} = useContext(Context)
 
-   // useEffect(() => {
-   //    fetch("/").then(
-   //       res => res.json()
-   //    ).then(
-   //       data => {
-   //          setBackendData(data)
-   //          console.log(data)
-   //       }
-   //    )
-   // }, [])
-    
+   console.log('HomePage rendered. Store: ', store.email, store.username)
+
    return(
       <div>
-         <Navbar/>
+         <Navbar />
          <div className="content">
                <img className="gallery-photo" src={photo1}></img>               
                <img className="gallery-photo" src={photo2}></img>

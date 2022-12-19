@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					email: email,
 					username: username
 				})
+				console.log('Store set. Values: ', 'email:', email, 'username:', username)
 			},
 			resetStore: () => {
 				setStore({

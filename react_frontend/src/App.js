@@ -17,13 +17,17 @@ function App() {
   const {store, actions} = useContext(Context)
   const token = Cookies.get('token')
   
+  console.log('App rendered ', store.email, store.username)
+
   useEffect(() => {
-    const decodedToken = decodeToken(token)
-    if (decodedToken) {
-      actions.setUserData(decodedToken.username, decodedToken.email)
-      console.log('Store set')
+    async function validateToken() {
+      const decodedToken = decodeToken(token)
+      if (decodedToken) {
+        console.log('Call setUserData in app')
+        actions.setUserData(decodedToken.username, decodedToken.email)
+      }
     }
-    console.log(store.username, store.email)
+    validateToken()
   }, [])
 
   return (

@@ -1,25 +1,11 @@
 import { React, useState, useEffect, useContext } from 'react'
-import { Link, useLocation, useParams, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { Context } from '../context/appContext'
-import { decodeToken } from 'react-jwt'
-import Cookies from 'js-cookie'
 
 const RestaurantPage = () => {
   
-  const navigate = useNavigate()
   const {store, actions} = useContext(Context)
   
-  useEffect(() => {
-    const token = Cookies.get('token')
-    const decodedToken = decodeToken(token)
-    if (decodedToken) {
-      actions.setUserData({username: decodedToken.username, email: decodedToken.email})
-      console.log(decodedToken)
-    } else {
-      navigate('/login')
-    }
-  }, [])
-
   const params = useParams()
   const location = useLocation()
   
@@ -27,7 +13,9 @@ const RestaurantPage = () => {
   const restaurantId = params && params.restaurant_id
   const menuId = location.state && location.state.menuId
   
-  const [tables, setTables] = useState([])
+  const [tables, setTables] = useState(null)
+
+  console.log('RestaurantPage rendered. Store: ', store.email, store.username)
 
   useEffect(() => {
     fetch(`/table/get/${restaurantId}`)
@@ -36,7 +24,7 @@ const RestaurantPage = () => {
     })
     .then(data => {
       setTables(data)
-      console.log(data)
+      console.log('Tables:', data)
     })
   }, [])
 
@@ -51,10 +39,9 @@ const RestaurantPage = () => {
           Menu
       </Link>
       <h1>Tables:</h1>
-      {tables.map((table, index) => {
+      {tables ? tables.map((table, index) => {
         return <h2 key={index}>Id {table.table_id} Position {table.table_position} Price {table.price} Number of places {table.number_of_places}</h2>
-        
-      })}
+      }) : null}
     </div>
   )
 }

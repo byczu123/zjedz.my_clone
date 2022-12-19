@@ -1,8 +1,15 @@
 import './Navbar.css'
 import logo from '../assets/restaurant_icon.jpg'
 import {Link} from 'react-router-dom'
+import { Context } from '../context/appContext'
+import { useContext, useEffect } from 'react'
 
 function Navbar() {
+    
+    const {store, actions} = useContext(Context)
+    
+    console.log('Navbar rendered. Store: ', store.email, store.username)
+
     return(
         <div className="header">
             <div className='left-section'>
@@ -16,6 +23,8 @@ function Navbar() {
             <div className='right-section'>
                 <Link className='link' to="/register">Register</Link>
                 <Link className='link' to="/login">Log in</Link>
+                <h2>{store.email}</h2>
+                <h2>{store.username}</h2>
             </div>
 	    </div>
     )
