@@ -12,9 +12,12 @@
     border: 1px solid;
     border-radius: 2%;
     margin: 5px;
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: center;
-    height: 700px;
+    height: 60vh;
+}
+.restaurant_container:hover{
+    box-shadow: 1px 1px 1px 1px;
 }
 .restaurant_link{
     vertical-align: top;

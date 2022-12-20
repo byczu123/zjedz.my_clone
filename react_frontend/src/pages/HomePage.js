@@ -30,17 +30,12 @@ function HomePage(){
          <div className="home-header">
             <Navbar />
          </div>
+         <p className="rest_paragraph">Nasze restauracje</p>
          <div className="grid_help">
          {
             restaurants ? restaurants.map((restaurant, index) => {
                 return <div className='restaurant_container' key={index}>
                     <h1 className='restaurant_name'>{restaurant.name}</h1>
-                    <p className='restaurant_description'>{restaurant.description}</p>
-                    <Link className='restaurant_link' to={`/restaurant/${restaurant.restaurant_id}`} 
-                    state={{
-                        name: restaurant.name,
-                        menuId: restaurant.menu_id}}>Strona restauracji
-                    </Link>
                 </div>
         }) 
         : null
