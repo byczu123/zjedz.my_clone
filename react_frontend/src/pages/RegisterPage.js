@@ -48,7 +48,7 @@ const RegisterPage = () => {
     .then(data => {
       console.log(data)
       setMessage(data.message)
-      if(data.message === 'Użytkownik zalogowany pomyślnie') {
+      if(data.message === 'Użytkownik został zarejestrowany pomyślnie.') {
         navigate('/login')
       }
     })

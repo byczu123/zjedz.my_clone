@@ -1,23 +1,18 @@
 body{
-    background-color: gray;
-    background-image: url(../assets/background.jpg);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background-color: #FDFDFD;
     background-size: cover;
 }
-.content{
-    display: flex;
-    justify-content: center;    
+.home-header {
+    /* margin: 0 1%; */
+    background-color: rgb(211, 248, 107);
+    height: 85vh;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/siuu.jpg");
+    background-size: cover;
 }
-.gallery-photo{
-    min-width: 400px;
-    vertical-align: top;
-    margin: 50px;
-    width: 102%;
-    height: 102%;
-    border-radius: 20px;
-    border: solid;
-    border-width: 8px;
-    border-color: rgb(31, 31, 31);
-}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }

@@ -1,6 +1,8 @@
 import { React, useState, useEffect, useContext } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { Context } from '../context/appContext'
+import fourTable from '../assets/table-4.png'
+import './RestaurantPage.css'
 
 const RestaurantPage = () => {
   
@@ -40,7 +42,10 @@ const RestaurantPage = () => {
       </Link>
       <h1>Tables:</h1>
       {tables ? tables.map((table, index) => {
-        return <h2 key={index}>Id {table.table_id} Position {table.table_position} Price {table.price} Number of places {table.number_of_places}</h2>
+        return <div key={index} className='table'>
+          <img src={fourTable} className='table-img'></img>
+          {/* <h2 key={index}>Id {table.table_id} Position {table.table_position} Price {table.price} Number of places {table.number_of_places}</h2> */}
+          </div>
       }) : null}
     </div>
   )

@@ -1,57 +1,57 @@
-.navbar {
-    background-color: blue;
-    width: 100%;
-    display: block;
-}
-.header{
-  height: 100px;
-  display: flex;
-  flex-direction: row;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+.navbar-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
+  background-color: transparent;
+  padding: 2px 50px;
 }
-.left-section{
-  background-color: rgb(31, 31, 31);
+.left-section {
   display: flex;
-  width: 500px;
-  justify-content: space-between;
 }
-.link{
+.link { 
+  font-size: 15px;
   display: flex;
   text-decoration: none;
-  background-color: rgb(31, 31, 31);
-  border: 0;
-  margin: 20px;
+  margin: 0 40px;
   align-items: center;
   color: white;
-  font-size:150%;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: bold;
-  font-style: italic;
+  font-family: 'Montserrat', sans-serif;
 }
-.middle-section{
+.right-section {
   display: flex;
-  background-color: rgb(31, 31, 31);
-  flex: 1;
+  justify-content: end;
   align-items: center;
-  justify-content: space-around;
 }
-img{
-  width: 100px;
-  height: 100px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.right-section{
-  background-color: rgb(31, 31, 31);
-  width: 500px;
-  display: flex;
-  justify-content: right;
-}
-.link:hover{
-  background-color: rgb(215, 215, 215);
-  color: black;
+.right-section .link:hover {
+  color: #BBBBBB;
   border-radius: 100px;
   transition: 0.3s;
+}
+#username {
+  color: orange;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+#logo p {
+  font-size: 32px;
+  font-style: italic;
+  font-weight: bold;
+  /* font-family: 'Pacifico', cursive; */
+  /* font-family: 'Roboto Condensed', sans-serif; */
+  font-family: 'Shadows Into Light', cursive;
+}
+#logo img{ 
+  height: 80px;
+  margin-right: 10px;
+}
+#dot {
+  color: orange;
+  font-size: 40px;
+  font-weight: bold;
 }
