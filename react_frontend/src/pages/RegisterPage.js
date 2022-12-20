@@ -62,9 +62,9 @@ const RegisterPage = () => {
               ) :(
                 <p></p>
               )}
-                <input name="username" placeholder="Username" type="text" ref={usernameInput}></input>
-              <input name="email" placeholder="E-mail" type="text" ref={emailInput}></input>
-              <input name="password" placeholder="Password" type="password" ref={passwordInput}></input>
+              <input name="username" className='register-input' placeholder="Username" type="text" ref={usernameInput}></input>
+              <input name="email" className='register-input' placeholder="E-mail" type="text" ref={emailInput}></input>
+              <input name="password" className='register-input' placeholder="Password" type="password" ref={passwordInput}></input>
               <button onClick={submitRegistration}>Confirm</button>
         </div>
   )

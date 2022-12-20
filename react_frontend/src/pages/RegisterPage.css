@@ -19,7 +19,7 @@
     width: 50%;
     overflow: hidden;
 }
-input{
+.register-input {
     background-color: beige;
     border: 1px;
     border-radius: 5px;
@@ -30,19 +30,18 @@ input{
     width: 50%;
     display: block;
     transition: ease-in-out, width 0.35s ease-in-out;
-
 }
-input:focus {
+
+.register-input:focus {
     width: 58%;
 
 }
-button{
+/* button{
     background-color: rgb(219, 235, 233) ;
     margin-top: 30px;
     width: 30%;
     cursor: pointer;
     margin-bottom: 50px;
     box-shadow: 0 3px #999;
-
-}
+} */
 

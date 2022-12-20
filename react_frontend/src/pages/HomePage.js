@@ -6,6 +6,7 @@ import './HomePage.css'
 import { Context } from "../context/appContext";
 import { Link } from "react-router-dom";
 import './RestaurantsPage.css'
+import HomeForm from "../components/HomeForm";
 
 function HomePage(){
 
@@ -29,6 +30,7 @@ function HomePage(){
       <div className="home-container">
          <div className="home-header">
             <Navbar />
+            <HomeForm />
          </div>
          <p className="rest_paragraph">Nasze restauracje</p>
          <div className="grid_help">

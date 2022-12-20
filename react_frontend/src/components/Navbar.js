@@ -8,15 +8,16 @@ function Navbar() {
     
     const {store, actions} = useContext(Context)
     
-
     console.log('Navbar rendered. Store: ', store.email, store.username)
     
     return (
         <div className="navbar-container">
             <div className='left-section'>
-                <Link to='/' id="logo" className='link'>
+                <Link to='/' className='link'>
                     <img src={logo}></img>
-                    <p>PROJECT</p><span id="dot" className='sieema'>.</span><p>db</p>
+                    <p>PROJECT</p>
+                    <p id="dot" className='sieema'>.</p>
+                    <p>db</p>
                 </Link >
             </div>
             {

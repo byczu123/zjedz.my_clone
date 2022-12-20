@@ -8,10 +8,11 @@
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   background-color: transparent;
-  padding: 2px 50px;
+  padding: 15px 50px;
 }
 .left-section {
   display: flex;
+
 }
 .link { 
   font-size: 15px;
@@ -28,30 +29,33 @@
   align-items: center;
 }
 .right-section .link:hover {
-  color: #BBBBBB;
+  color: var(--hover-color);
   border-radius: 100px;
   transition: 0.3s;
 }
 #username {
-  color: orange;
+  color: var(--secondary-text-color);
   font-size: 20px;
   font-weight: bold;
   margin-right: 20px;
 }
-#logo p {
+
+.left-section .link p {
   font-size: 32px;
   font-style: italic;
   font-weight: bold;
   /* font-family: 'Pacifico', cursive; */
   /* font-family: 'Roboto Condensed', sans-serif; */
   font-family: 'Shadows Into Light', cursive;
+  margin: 0;
 }
-#logo img{ 
+.left-section .link img{ 
   height: 80px;
   margin-right: 10px;
 }
 #dot {
   color: orange;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
+  font-family: 'Shadows Into Light', cursive;
 }
