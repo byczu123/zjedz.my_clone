@@ -88,3 +88,12 @@
     background-color: var(--secondary-text-color);
     padding: 0.5em;
 }
+
+.home-form-button-container button:hover {
+    background-color: var(--hover-secondary-color);
+}
+
+.home-restaurants-section {
+    display: flex;
+    justify-content: center;
+}

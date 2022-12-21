@@ -1,6 +1,10 @@
+.home-container {
+  background-color: var(--background-color)
+}
+
 .home-header {
     /* margin: 0 1%; */
-    background-color: rgb(211, 248, 107);
+    /* background-color: rgb(211, 248, 107); */
     height: 85vh;
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 5%;
@@ -15,5 +19,7 @@ body::-webkit-scrollbar-thumb {
   .rest_paragraph{
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    font-size:150%;
+    font-size: 150%;
+    font-weight: 300;
+    margin-top: 2rem;
 }

@@ -2,7 +2,7 @@ import { React, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/appContext';
 import './RestaurantsPage.css'
-import Navbar from '../components/Navbar';
+import restaurantLogo from '../assets/cojes.jpg'
 
 const RestaurantsPage = () => {
 
@@ -23,25 +23,50 @@ const RestaurantsPage = () => {
     }, []);
 
     return (
-    <div>
-        <Navbar/>   
-        <div className='grid_help'>
-            {
-            restaurants ? restaurants.map((restaurant, index) => {
-                return <div className='restaurant_container' key={index}>
-                    <h1 className='restaurant_name'>{restaurant.name}</h1>
-                    <p className='restaurant_description'>{restaurant.description}</p>
-                    <Link className='restaurant_link' to={`/restaurant/${restaurant.restaurant_id}`} 
-                    state={{
+     <div className='grid_help'>
+        {
+        restaurants ? restaurants.map((restaurant, index) => {
+            return <div className='restaurant-container' key={index}>
+                <div className='restaurant-image-container'>
+                    <img src={restaurantLogo}></img>
+                </div>
+                <div className='restaurant-description'>
+                    <h2 className='restaurant_name'>{restaurant.name}</h2>
+                    <h3>Rezerwacja stolika</h3>
+                    <h4>najbliższe godziny dziś</h4>
+                </div>
+                <div className='restaurant-hours-container'>
+                    <div className='restaurant-hours'>
+                        <button className='restaurant-hour-button'>
+                            14:30
+                        </button>
+                        <button className='restaurant-hour-button'>
+                            14:30
+                        </button>
+                        <button className='restaurant-hour-button'>
+                            14:30
+                        </button> 
+                        <button className='restaurant-hour-button'>
+                            14:30
+                        </button>
+                    </div>
+                </div>
+                
+                {/* <p className='restaurant_description'>{restaurant.description}</p> */}
+                <div className='restaurant-link-container'>
+                   <Link className='restaurant_link' to={`/restaurant/${restaurant.restaurant_id}`} 
+                        state={{
                         name: restaurant.name,
                         menuId: restaurant.menu_id}}>Strona restauracji
-                    </Link>
+                    </Link> 
                 </div>
+                
+            </div>
         }) 
         : null
         }
     </div>
-    </div>
+    
   )
 }
 

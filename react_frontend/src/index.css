@@ -1,6 +1,8 @@
 :root {
   --secondary-text-color: #F6C839;
   --hover-color: #BBBBBB;
+  --background-color: #F3F3F1;
+  --hover-secondary-color: #F8E152;
 }
 
 body {
@@ -10,8 +12,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
-  background-color: #FDFDFD;
-
 }
 
 /* code {

@@ -7,6 +7,7 @@ import { Context } from "../context/appContext";
 import { Link } from "react-router-dom";
 import './RestaurantsPage.css'
 import HomeForm from "../components/HomeForm";
+import RestaurantsPage from "./RestaurantsPage";
 
 function HomePage(){
 
@@ -33,15 +34,8 @@ function HomePage(){
             <HomeForm />
          </div>
          <p className="rest_paragraph">Nasze restauracje</p>
-         <div className="grid_help">
-         {
-            restaurants ? restaurants.map((restaurant, index) => {
-                return <div className='restaurant_container' key={index}>
-                    <h1 className='restaurant_name'>{restaurant.name}</h1>
-                </div>
-        }) 
-        : null
-        }
+         <div className="home-restaurants-section">
+            <RestaurantsPage />
          </div>
          <div className="home-footer">
 

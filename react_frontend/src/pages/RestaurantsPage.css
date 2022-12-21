@@ -1,24 +1,109 @@
 .grid_help{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-    
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-column-gap: 1em;
+    width: 85%;
+    margin-bottom: 100px;
 }
-.restaurant_description{
+/* .restaurant_description{
     height: 550px;
-}
-.restaurant_container{
-    background-color: rgb(196, 192, 192);
+} */
+
+.restaurant-container{
+    background-color: white;;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    border: 1px solid;
-    border-radius: 2%;
-    margin: 5px;
+    /* font-family: 'Montserrat', sans-serif; */
+    border-radius: 30px;
     margin-top: 10px;
     text-align: center;
-    height: 60vh;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
+    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: 85vh;
 }
-.restaurant_container:hover{
-    box-shadow: 1px 1px 1px 1px;
+
+.restaurant-image-container {
+    height: 60%;
+    border-radius: 30px;
+    margin-bottom: 10%
 }
-.restaurant_link{
+
+.restaurant-image-container img {
+    margin: 2%;
+    width: 96%;
+    height: 96%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.restaurant-description h2 {
+    font-size: 1.7em;
+    font-weight: 300;
+}
+
+.restaurant-description h3 {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.restaurant-description h4 {
+    font-size: 0.7em;
+    font-weight: 300;
+}
+
+.restaurant-hours {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.restaurant-hours-container {
+    margin-top: 8%;
+    display: flex;
+    justify-content: center;
+}
+
+.restaurant-hour-button {
+    margin: 2%;
+    border-radius: 10px;
+    border: 0.5px solid black;
+    background-color: transparent;
+    padding: 15%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+.restaurant-hour-button:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.restaurant-link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.restaurant_link {
+    border-radius: 30px;
+    width: 94%;
+    padding: 3%;
+    text-decoration: none;
+    color: black;
     vertical-align: top;
+    background-color: var(--secondary-text-color);
+}
+
+.restaurant_link:hover {
+    color: black;
+    background-color: var(--hover-secondary-color);
+    /* background-color: #F8D252; */
+}
+
+.restaurant-container:hover{
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
 }
