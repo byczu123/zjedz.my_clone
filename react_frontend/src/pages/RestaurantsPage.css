@@ -21,20 +21,42 @@
     /* box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     height: 85vh;
+    padding: 2%;
 }
 
 .restaurant-image-container {
     height: 60%;
     border-radius: 30px;
-    margin-bottom: 10%
+    overflow: hidden;
+    position: relative;
+}
+
+.restaurant-image-description {
+    position: absolute;
+    top: 3%;
+    left: 5%;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
 }
 
 .restaurant-image-container img {
-    margin: 2%;
-    width: 96%;
-    height: 96%;
+    /* margin: 2%; */
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 30px;
+    transform: scale(1);
+}
+
+.restaurant-image-container img:hover {
+    transition: transform 1s;
+    transform: scale(1.1);
+    transform-origin: center;
+}
+.restaurant-description {
+    margin-top: 10%;
 }
 
 .restaurant-description h2 {
@@ -78,7 +100,7 @@
 .restaurant-hour-button:hover {
     background-color: black;
     color: white;
-    border: 1px solid white;
+    border: 0.5px solid white;
 }
 
 .restaurant-link-container {

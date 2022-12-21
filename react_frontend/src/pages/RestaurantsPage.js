@@ -29,6 +29,9 @@ const RestaurantsPage = () => {
             return <div className='restaurant-container' key={index}>
                 <div className='restaurant-image-container'>
                     <img src={restaurantLogo}></img>
+                    <div className='restaurant-image-description'>
+                        <p>Kraków</p>
+                    </div>
                 </div>
                 <div className='restaurant-description'>
                     <h2 className='restaurant_name'>{restaurant.name}</h2>
