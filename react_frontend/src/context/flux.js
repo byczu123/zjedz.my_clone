@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			email: null,
-			username: null
+			username: null,
+			currentLocation: null,
 		},
 		actions: {
 			setUserData: (email, username) => {
@@ -11,6 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					username: username
 				})
 				console.log('Store set. Values: ', 'email:', email, 'username:', username)
+			},
+			setCurrentLocation: (location) => {
+				setStore({currentLocation: location})
 			},
 			logout: () => {
 				const Cookies = require("js-cookie")

@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import photo1 from "../assets/interior_restaurant1.jpg"
-import photo2 from "../assets/interior_restuarant2.jpeg"
 import './HomePage.css'
 import { Context } from "../context/appContext";
-import { Link } from "react-router-dom";
 import './RestaurantsPage.css'
 import HomeForm from "../components/HomeForm";
+
 import RestaurantsPage from "./RestaurantsPage";
 
 function HomePage(){
 
+   const [locationValue, setLocationValue] = useState(null)
    const {store, actions} = useContext(Context)
    const [restaurants, setRestaurants] = useState(null)
 
@@ -25,7 +24,11 @@ function HomePage(){
         })
     }, []);
 
-   console.log('HomePage rendered. Store: ', store.email, store.username)
+   useEffect(() => {
+      actions.setCurrentLocation(null)
+      console.log('Zmiana wartości lokacji na ', store.currentLocation)
+   }, [store.location])
+   console.log('HomePage rendered. Store: ', store.email, store.username, locationValue)
 
    return(
       <div className="home-container">
@@ -33,7 +36,7 @@ function HomePage(){
             <Navbar />
             <HomeForm />
          </div>
-         <p className="rest_paragraph">Nasze restauracje</p>
+         <p className="rest_paragraph">Polecane restauracje</p>
          <div className="home-restaurants-section">
             <RestaurantsPage />
          </div>

@@ -26,11 +26,14 @@ const RestaurantsPage = () => {
      <div className='grid_help'>
         {
         restaurants ? restaurants.map((restaurant, index) => {
-            return <div className='restaurant-container' key={index}>
+            // console.log('Location in store: ', store.currentLocation, 'Location of this restaurant: ', restaurant.location)
+            if (!store.currentLocation || restaurant.location === store.currentLocation) {
+                // console.log('WARUNEK SPEŁNIONY')
+                return <div className='restaurant-container' key={index}>
                 <div className='restaurant-image-container'>
                     <img src={restaurantLogo}></img>
                     <div className='restaurant-image-description'>
-                        <p>Kraków</p>
+                        <p>{restaurant.location}</p>
                     </div>
                 </div>
                 <div className='restaurant-description'>
@@ -65,6 +68,7 @@ const RestaurantsPage = () => {
                 </div>
                 
             </div>
+            }
         }) 
         : null
         }

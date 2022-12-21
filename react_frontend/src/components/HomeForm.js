@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import './HomeForm.css'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Dropdown } from 'react-bootstrap'
+import LocationContext from '../context/locationContext'
+import { Context } from '../context/appContext'
+
 
 const HomeForm = () => {
-    return (
+  const [locations, setLocations] = useState(null)
+  const [days, setDays] = useState(null)
+  const [hours, setHours] = useState(null)
+  const [people, setPeople] = useState(null)
+  const {store, actions} = useContext(Context)
+
+  const [locationValue, setLocationValue] = useState('Wszystkie miasta')
+  const [dayValue, setDayValue] = useState('')
+  const [hourValue, setHourValue] = useState('')
+  const [peopleValue, setPeopleValue] = useState('')
+
+  console.log('HomeForm rendered. Location: ', store.currentLocation)
+
+  useEffect(() => {
+    fetch('/data/get/home-form')
+        .then(res => {
+            if (res.status === 200) return res.json()
+        })
+        .then(data => {
+            setLocations(data)
+            // setLocationValue(data[0].location)
+            console.log('Location: ', data)
+        })
+    
+  }, [])
+
+  return (
         <div className='home-form-container'>
           <div className="home-form">
               <div className="home-form-description">
@@ -12,29 +41,23 @@ const HomeForm = () => {
                   <h2>Zarezerwuj miejsce</h2>
               </div>
               <div className="home-form-dropdown">
-                <DropdownButton id="dropdown-item-button" title="Kraków">
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
+                <DropdownButton id="dropdown-item-button" title={locationValue}>
+                  {
+                  locations ? locations.map((value, index) => {
+                    return <Dropdown.Item key={index} as="button" onClick={() => {
+                      console.log(value.location)
+                      setLocationValue(value.location)
+                      actions.setCurrentLocation(value.location)
+                    }}>{value.location}</Dropdown.Item>
+                  }) 
+                  : null
+                  }
                 </DropdownButton>
-                <DropdownButton id="dropdown-item-button" title="2022-12-20">
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
+                <DropdownButton id="dropdown-item-button" title="2022-11-21">
                 </DropdownButton>
                 <DropdownButton id="dropdown-item-button" title="18:00">
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
                 </DropdownButton>
                 <DropdownButton id="dropdown-item-button" title="2 osoby">
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
-                  <Dropdown.Item as="button">Something else</Dropdown.Item>
                 </DropdownButton>
               </div>
               <div className="home-form-description">

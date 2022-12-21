@@ -1,7 +1,7 @@
 import { db } from "../db.js"
 
-export const getRestaurants = (req, res) => {
-    const sql = `SELECT restaurant_id, name, location, menu_id, description FROM restaurant;`
+export const getHomeFormData = (req, res) => {
+    const sql = `SELECT DISTINCT location FROM restaurant`
     db.query(sql, (error, results) => {
         if (error) {
             console.log(error)
