@@ -63,7 +63,9 @@ const RestaurantsPage = () => {
                    <Link className='restaurant_link' to={`/restaurant/${restaurant.restaurant_id}`} 
                         state={{
                         name: restaurant.name,
-                        menuId: restaurant.menu_id}}>Strona restauracji
+                        menuId: restaurant.menu_id,
+                        location: restaurant.location,
+                        description: restaurant.description}}>Strona restauracji
                     </Link> 
                 </div>
                 
