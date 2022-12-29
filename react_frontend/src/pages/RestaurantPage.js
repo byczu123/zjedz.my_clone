@@ -19,21 +19,21 @@ const RestaurantPage = () => {
   const restaurantLocation = location.state && location.state.location
   const description = location.state && location.state.description
 
-  const [menu, setMenu] = useState(null)
+  const [dishes, setDishes] = useState(null)
 
   console.log('RestaurantsPage rendered. Store: ', store.email, store.username)
   
   useEffect(() => {
-      fetch('/menu/dishes/1')
+      fetch(`/menu/dishes/${menuId}`)
       .then(res => {
           if (res.status === 200) return res.json()
       })
       .then(data => {
-          const dataString = JSON.stringify(data)
-          setMenu(dataString)
+          setDishes(data)
           console.log('Menu: ', data)
       })
   }, []);
+
 
   return (
     <div>
@@ -76,11 +76,15 @@ const RestaurantPage = () => {
             </button>
          </div>
          </div>
-        <button className='restaurant_link'>Zarezerwuj</button>
+        <button className='reservation-button'>Zarezerwuj</button>
       </div>
-      <div className='menu-container'>
-       <RestaurantsPage/>
-      </div>
+      <div className='about-container'>
+            <h1>Menu</h1>
+            {dishes ? dishes.map((dish, index) => {
+                return <div className='dish-container' key={index}>
+                  <h5 className='dish-name'>{dish.name}</h5> <p className='price'>{dish.price}zł/szt.</p></div>
+            }) : null}
+        </div>
     </div>
   )
 }

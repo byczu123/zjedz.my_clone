@@ -5,7 +5,7 @@
 .home-header {
     /* margin: 0 1%; */
     /* background-color: rgb(211, 248, 107); */
-    height: 85vh;
+    height: 595px;
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 5%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/XD.jpg");

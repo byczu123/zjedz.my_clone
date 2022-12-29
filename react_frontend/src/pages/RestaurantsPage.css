@@ -20,7 +20,7 @@
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
     /* box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    height: 85vh;
+    height: 650px;
     padding: 2%;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .restaurant-hours-container {
-    margin-top: 3%;
+    margin-top: 8%;
     display: flex;
     justify-content: center;
 }
