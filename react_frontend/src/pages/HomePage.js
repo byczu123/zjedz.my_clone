@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import './HomePage.css'
+import '../styles/HomePage.css'
 import { Context } from "../context/appContext";
-import './RestaurantsPage.css'
 import HomeForm from "../components/HomeForm";
-
-import RestaurantsPage from "./RestaurantsPage";
+import RestaurantPanel from "../components/RestaurantPanel";
 
 function HomePage(){
 
@@ -38,7 +36,7 @@ function HomePage(){
          </div>
          <p className="rest_paragraph">Polecane restauracje</p>
          <div className="home-restaurants-section">
-            <RestaurantsPage />
+            <RestaurantPanel />
          </div>
          <div className="home-footer">
 

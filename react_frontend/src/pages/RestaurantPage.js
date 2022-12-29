@@ -1,9 +1,8 @@
 import { React, useState, useEffect, useContext } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { Context } from '../context/appContext'
-import './RestaurantPage.css'
+import '../styles/RestaurantPage.css'
 import Navbar from '../components/Navbar'
-import RestaurantsPage from '../pages/RestaurantsPage'
 
 
 const RestaurantPage = () => {

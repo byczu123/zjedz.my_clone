@@ -1,22 +1,19 @@
-import React from 'react'
-import { useRef, useState, useContext, useEffect } from 'react'
-import '../styles/RegisterPage.css'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom'
+import { useRef, useState, useContext, useEffect } from 'react'
 import { Context } from '../context/appContext'
 
-const RegisterPage = () => {
+function RegisterModal(props) {
 
   const navigate = useNavigate()
-  const {store, actions} = useContext(Context)
-
   const emailInput = useRef()
   const passwordInput = useRef()
   const usernameInput = useRef()
-  
+  const {store, actions} = useContext(Context)
+
   const [message, setMessage] = useState(null)
 
-  console.log('RegisterPage rendered. Store: ', store.email, store.username)
-  
   useEffect(() => {
     if (store.email && store.username) {
       navigate('/')
@@ -24,11 +21,12 @@ const RegisterPage = () => {
     }
   }, [store.email, store.username])
 
+  
   const submitRegistration = () => {
     const username = usernameInput.current.value
     const email = emailInput.current.value
     const password = passwordInput.current.value
-    
+  
     const options = {
       method: 'POST',
       headers: {
@@ -40,7 +38,6 @@ const RegisterPage = () => {
         password: password
       })
     }
-  
     fetch('/auth/register', options)
     .then(res => {
       if (res.status === 200) return res.json()
@@ -53,21 +50,29 @@ const RegisterPage = () => {
       }
     })
   }
-  
+
   return (
-        <div className='container'>
-              <h1>Register</h1>
-              {message ?(
-                <p>{message}</p>
-              ) :(
-                <p></p>
-              )}
-              <input name="username" className='register-input' placeholder="Username" type="text" ref={usernameInput}></input>
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modal heading
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      <input name="username" className='register-input' placeholder="Username" type="text" ref={usernameInput}></input>
               <input name="email" className='register-input' placeholder="E-mail" type="text" ref={emailInput}></input>
               <input name="password" className='register-input' placeholder="Password" type="password" ref={passwordInput}></input>
               <button onClick={submitRegistration}>Confirm</button>
-        </div>
-  )
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
 }
-
-export default RegisterPage
+export default RegisterModal;

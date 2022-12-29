@@ -1,10 +1,10 @@
 import { React, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/appContext';
-import './RestaurantsPage.css'
+import '../styles/RestaurantPanel.css'
 import restaurantLogo from '../assets/cojes.jpg'
 
-const RestaurantsPage = () => {
+const RestaurantPanel = () => {
 
     const {store, actions} = useContext(Context)
     const [restaurants, setRestaurants] = useState(null)
@@ -79,4 +79,4 @@ const RestaurantsPage = () => {
   )
 }
 
-export default RestaurantsPage
+export default RestaurantPanel

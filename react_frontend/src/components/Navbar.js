@@ -1,11 +1,12 @@
-import './Navbar.css'
+import '../styles/Navbar.css'
 import {Link} from 'react-router-dom'
 import { Context } from '../context/appContext'
-import { useContext } from 'react'
+import { useContext,useState } from 'react'
 import logo from '../assets/navbar-logo.png'
+import RegisterModal from './RegisterModal'
 
 function Navbar() {
-    
+    const [modalShow, setModalShow] = useState(false);
     const {store, actions} = useContext(Context)
     
     console.log('Navbar rendered. Store: ', store.email, store.username)
@@ -28,8 +29,12 @@ function Navbar() {
             </div> 
             :
             <div className='right-section'>
-                <Link className='link' to="/register">Register</Link>
+                <Link onClick={() => setModalShow(true)} className='link'>Register</Link>
                 <Link className='link' to="/login">Log in</Link>
+                <RegisterModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
             </div>
             }
 	    </div>
