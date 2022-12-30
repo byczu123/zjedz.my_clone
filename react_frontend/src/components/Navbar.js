@@ -1,35 +1,40 @@
-import './Navbar.css'
-import logo from '../assets/restaurant_icon.jpg'
+import '../styles/Navbar.css'
 import {Link} from 'react-router-dom'
 import { Context } from '../context/appContext'
-import { useContext, useEffect } from 'react'
+import { useContext,useState } from 'react'
+import logo from '../assets/navbar-logo.png'
+import RegisterModal from './RegisterModal'
 
 function Navbar() {
-    
+    const [modalShow, setModalShow] = useState(false);
     const {store, actions} = useContext(Context)
     
     console.log('Navbar rendered. Store: ', store.email, store.username)
     
-    return(
-        <div className="header">
+    return (
+        <div className="navbar-container">
             <div className='left-section'>
-                <Link className='link' >Our restaurants</Link >
-                <Link to='/restaurants' className='link'>Make a reservation</Link >
-                <Link className='link'>Gallery</Link >
-            </div>
-            <div className='middle-section'>
-                <img src={logo}></img>
+                <Link to='/' className='link'>
+                    <img src={logo}></img>
+                    <p>PROJECT</p>
+                    <p id="dot" className='sieema'>.</p>
+                    <p>db</p>
+                </Link >
             </div>
             {
             store.email && store.username ? 
             <div className='right-section'>
-                <h2>{store.username}</h2>
-                <button onClick={actions.logout}>Log out</button>
+                <p>hello, </p><p id='username'>{store.username}</p>
+                <Link className='link' onClick={actions.logout}>Log out</Link>
             </div> 
             :
             <div className='right-section'>
-                <Link className='link' to="/register">Register</Link>
+                <Link onClick={() => setModalShow(true)} className='link'>Register</Link>
                 <Link className='link' to="/login">Log in</Link>
+                <RegisterModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
             </div>
             }
 	    </div>

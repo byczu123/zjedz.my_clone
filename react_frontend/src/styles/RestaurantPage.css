@@ -1,0 +1,116 @@
+.top-container{
+    overflow:visible;
+    background-color: darkblue;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    height: 450px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/XD.jpg");
+    position: relative;
+}
+.info-container{
+    overflow: visible;
+    margin-top: 10rem;
+    width: 100vh;
+    margin-left: 6rem;
+}
+.restaurant-name{
+    color: white;
+    font-size: 2.25rem;
+}
+.desc{
+    color: white;
+    margin-bottom: 10px;
+    font-weight: lighter;
+}
+.location{
+    color: white;
+    margin-bottom: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+.list{
+    top: 10vh;
+    padding-left: 0;
+}
+li{
+    position: relative;
+    color: white;
+    display: inline;
+    border: 1px solid white;
+    border-radius: 100px;
+    margin-right: 1%;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;    
+}
+
+a{
+    margin:20px;
+    color: white;
+    text-decoration: none;
+}
+.about-container{
+    vertical-align: top;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-left: 8rem;
+    display: inline-block;
+    width: 660px;
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.reservation-container{
+    margin-top: 1rem;
+    text-align: center;
+    border-radius: 30px;
+    background-color: white;
+    position: sticky;
+    top: 10vh;
+    margin-left: 3rem;
+    display: inline-block;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 40vw;
+    z-index: 1;
+}
+
+.dish-container{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+li:hover{
+    color: black;
+    background-color: white ;
+    cursor: pointer;
+}
+.description{
+    margin-left: 1.5rem;
+}
+.title{
+    margin-left: 0.5rem;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.reservation-button{
+    font-size: large;
+    border-radius: 30px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 90%;
+    padding: 3%;
+    text-decoration: none;
+    color: black;
+    background-color: var(--secondary-text-color);
+    border: 1px solid var(--secondary-text-color)
+}
+.reservation-button:hover{
+    background-color: rgb(221, 225, 14) ;
+}
+.dish-name{
+    display: inline;
+    justify-content: center;
+}

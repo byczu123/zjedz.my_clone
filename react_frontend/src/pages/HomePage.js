@@ -1,23 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import photo1 from "../assets/interior_restaurant1.jpg"
-import photo2 from "../assets/interior_restuarant2.jpeg"
-import './HomePage.css'
+import '../styles/HomePage.css'
 import { Context } from "../context/appContext";
-
+import HomeForm from "../components/HomeForm";
+import RestaurantPanel from "../components/RestaurantPanel";
 
 function HomePage(){
 
+   const [locationValue, setLocationValue] = useState(null)
    const {store, actions} = useContext(Context)
+   const [restaurants, setRestaurants] = useState(null)
 
-   console.log('HomePage rendered. Store: ', store.email, store.username)
+   useEffect(() => {
+        fetch('/restaurant/get')
+        .then(res => {
+            if (res.status === 200) return res.json()
+        })
+        .then(data => {
+            setRestaurants(data)
+            console.log('Restaurants: ', data)
+        })
+    }, []);
+
+   useEffect(() => {
+      actions.setCurrentLocation(null)
+      console.log('Zmiana wartości lokacji na ', store.currentLocation)
+   }, [store.location])
+   console.log('HomePage rendered. Store: ', store.email, store.username, locationValue)
 
    return(
-      <div>
-         <Navbar />
-         <div className="content">
-               <img className="gallery-photo" src={photo1}></img>               
-               <img className="gallery-photo" src={photo2}></img>
+      <div className="home-container">
+         <div className="home-header">
+            <Navbar />
+            <HomeForm />
+         </div>
+         <p className="rest_paragraph">Polecane restauracje</p>
+         <div className="home-restaurants-section">
+            <RestaurantPanel />
+         </div>
+         <div className="home-footer">
+
          </div>
       </div>
    )

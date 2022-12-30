@@ -1,0 +1,25 @@
+.home-container {
+  background-color: var(--background-color)
+}
+
+.home-header {
+    /* margin: 0 1%; */
+    /* background-color: rgb(211, 248, 107); */
+    height: 595px;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/XD.jpg");
+    background-size: cover;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+  .rest_paragraph{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 150%;
+    font-weight: 300;
+    margin-top: 2rem;
+}
