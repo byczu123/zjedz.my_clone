@@ -1,7 +1,6 @@
 import { React, useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Context } from '../context/appContext'
-import fourTable from '../assets/table-4.png'
 
 const MenuPage = () => {
 

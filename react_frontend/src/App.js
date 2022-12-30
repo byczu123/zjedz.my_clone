@@ -2,17 +2,14 @@ import './App.css';
 import {useState, useEffect, useContext} from 'react'
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import HomePage from './pages/HomePage';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import RestaurantsPage from './components/RestaurantPanel';
 import Cookies from 'js-cookie'
 import RestaurantPage from './pages/RestaurantPage';
-import MenuPage from './pages/MenuPage';
 import { Context } from './context/appContext';
 import { decodeToken } from "react-jwt"
 import injectContext from './context/appContext';
 
 function App() {
+  
   
   const {store, actions} = useContext(Context)
   const token = Cookies.get('token')
@@ -34,10 +31,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path='/' element={<HomePage/>}/>
-        <Route exact path='/register' element={<RegisterPage/>}/>
-        <Route exact path='/login' element={<LoginPage/>}/>
         <Route exact path='/restaurant/:restaurant_id' element={<RestaurantPage/>}/>
-        <Route exact path='/restaurant/:restaurant_id/menu' element={<MenuPage/>}/>
       </Routes>
     </BrowserRouter>
   );

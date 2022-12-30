@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useRef, useState, useContext, useEffect } from 'react'
 import { Context } from '../context/appContext'
 
+
+
 function RegisterModal(props) {
 
   const navigate = useNavigate()

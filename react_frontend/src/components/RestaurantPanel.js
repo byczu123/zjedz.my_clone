@@ -31,7 +31,7 @@ const RestaurantPanel = () => {
                 // console.log('WARUNEK SPEŁNIONY')
                 return <div className='restaurant-container' key={index}>
                 <div className='restaurant-image-container'>
-                    <img src={restaurantLogo}></img>
+                    <img src={restaurant.link}></img>
                     <div className='restaurant-image-description'>
                         <p>{restaurant.location}</p>
                     </div>
@@ -65,7 +65,8 @@ const RestaurantPanel = () => {
                         name: restaurant.name,
                         menuId: restaurant.menu_id,
                         location: restaurant.location,
-                        description: restaurant.description}}>Strona restauracji
+                        description: restaurant.description
+                        }}>Strona restauracji
                     </Link> 
                 </div>
                 
