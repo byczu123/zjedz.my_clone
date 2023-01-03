@@ -34,6 +34,7 @@ function App() {
         <Route exact path='/restaurant/:restaurant_id' element={<RestaurantPage/>}/>
       </Routes>
     </BrowserRouter>
+    
   );
 }
 

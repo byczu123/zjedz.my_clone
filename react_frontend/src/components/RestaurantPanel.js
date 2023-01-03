@@ -9,7 +9,7 @@ const RestaurantPanel = () => {
     const {store, actions} = useContext(Context)
     const [restaurants, setRestaurants] = useState(null)
 
-    console.log('RestaurantsPage rendered. Store: ', store.email, store.username)
+    console.log('RestaurantPanel rendered. Store: ', store.email, store.username)
     
     useEffect(() => {
         fetch('/restaurant/get')

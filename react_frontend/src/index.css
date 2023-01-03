@@ -2,7 +2,10 @@
   --secondary-text-color: #F6C839;
   --hover-color: #BBBBBB;
   --background-color: #F3F3F1;
+  --secondary-background-color: white;
   --hover-secondary-color: #F8E152;
+  --home-header-size: 70vh;
+  --restaurant-card-size: 60vh;
 }
 
 body {
@@ -13,6 +16,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
+
+/* body::-webkit-scrollbar-thumb {
+  background-color: orange;
+  outline: 1px solid slategrey;
+} */
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

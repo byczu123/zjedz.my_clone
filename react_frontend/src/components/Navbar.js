@@ -14,7 +14,7 @@ function Navbar() {
     return (
         <div className="navbar-container">
             <div className='left-section'>
-                <Link to='/' className='link'>
+                <Link to='/' className='navbar-link'>
                     <img src={logo}></img>
                     <p>PROJECT</p>
                     <p id="dot" className='sieema'>.</p>
@@ -25,12 +25,12 @@ function Navbar() {
             store.email && store.username ? 
             <div className='right-section'>
                 <p>hello, </p><p id='username'>{store.username}</p>
-                <Link className='link' onClick={actions.logout}>Log out</Link>
+                <Link className='navbar-link' onClick={actions.logout}>Log out</Link>
             </div> 
             :
             <div className='right-section'>
-                <Link onClick={() => setModalShow(true)} className='link'>Register</Link>
-                <Link className='link' to="/login">Log in</Link>
+                <Link onClick={() => setModalShow(true)} className='navbar-link'>Register</Link>
+                <Link className='navbar-link' to="/login">Log in</Link>
                 <RegisterModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
