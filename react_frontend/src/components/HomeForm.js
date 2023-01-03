@@ -53,8 +53,9 @@ const HomeForm = () => {
                   : null
                   }
                 </DropdownButton>
-                <DropdownButton id="dropdown-item-button" title="2022-11-21">
-                </DropdownButton>
+                {/* <DropdownButton id="dropdown-item-button" type="date" title="2022-11-21">
+                </DropdownButton> */}
+                <input type="date" id="dropdown-item-button"></input>
                 <DropdownButton id="dropdown-item-button" title="18:00">
                 </DropdownButton>
                 <DropdownButton id="dropdown-item-button" title="2 osoby">
@@ -62,7 +63,7 @@ const HomeForm = () => {
               </div>
               <div className="home-form-description">
                   <h3>lub wyszukaj</h3>
-                  <input></input>
+                  <input placeholder='restauracje...'></input>
               </div>
               <div className='home-form-button-container'>
                   <button>Szukaj</button>

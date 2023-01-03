@@ -40,6 +40,7 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 0.9em;
+    z-index: 3;
 }
 
 .restaurant-image-container img {

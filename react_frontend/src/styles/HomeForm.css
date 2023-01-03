@@ -51,6 +51,7 @@
     padding: 0.5rem;
     font-weight: 300;
     backdrop-filter: blur(2px) saturate(100%);
+    color: white;
 }
 
 #dropdown-item-button:hover {
@@ -59,21 +60,29 @@
 
 .home-form-description input {
     width: 55%;
-    border: 0.5px solid white;
+    border: 0.5px solid gray;
     padding: 0.5rem;
     border-radius: 100px;
     outline: none;
     background: transparent;
     font-size: 1.2rem;
-    color: white;
+    color: gray;
     font-weight: 300;
     backdrop-filter: blur(2px) saturate(100%);
 }
 
 .home-form-description input::placeholder {
-    color: white;
-    font-size: 1rem;
+    color: gray;
+    font-size: 1.2rem;
 }
+
+.home-form-description input:focus {
+    border: 0.5px solid var(--secondary-text-color);
+    color: white;
+}
+.home-form-description input:focus::placeholder {
+    color: white;
+} 
 
 .home-form-button-container {
     margin-top: calc(var(--home-header-size) / 10);
