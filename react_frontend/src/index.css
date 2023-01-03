@@ -6,6 +6,7 @@
   --hover-secondary-color: #F8E152;
   --home-header-size: 70vh;
   --restaurant-card-size: 60vh;
+  --register-login-modal-height: 65vh;
 }
 
 body {

@@ -1,0 +1,30 @@
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 30vw !important;
+    }
+}
+
+.login-register-navigation button {
+    width: 50%;
+    font-size: 1.2rem;
+    border: none;
+    background-color: white;
+}
+
+.login-register-navigation .active {
+    border-bottom: 4px solid var(--secondary-text-color);
+}
+
+.login-register-form-footer {
+    margin-top: calc(var(--register-login-modal-height) / 15) !important;
+}
+
+.icon{
+    display: inline;
+    color: black;
+}
+
+.modal-content {
+    border-radius: 35px !important;
+    width: 50%;
+}
