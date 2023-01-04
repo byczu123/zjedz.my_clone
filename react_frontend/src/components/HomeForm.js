@@ -3,6 +3,7 @@ import '../styles/HomeForm.css'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Dropdown } from 'react-bootstrap'
 import { Context } from '../context/appContext'
+import ReservationModal from './ReservationModal'
 
 
 const HomeForm = () => {
@@ -39,6 +40,7 @@ const HomeForm = () => {
               <div className="home-form-description">
                   <h1>Odkrywaj lokalną gastronomię</h1>
                   <h2>Zarezerwuj miejsce</h2>
+                  <ReservationModal/>
               </div>
               <div className="home-form-dropdown">
                 <DropdownButton id="dropdown-item-button" title={locationValue}>
