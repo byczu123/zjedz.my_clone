@@ -4,6 +4,7 @@ import { Context } from '../context/appContext'
 import { useContext,useState } from 'react'
 import logo from '../assets/navbar-logo.png'
 import RegisterModal from './RegisterModal'
+import LoginRegisterModal from './LoginRegisterModal'
 
 function Navbar() {
     const [modalShow, setModalShow] = useState(false);
@@ -24,17 +25,18 @@ function Navbar() {
             {
             store.email && store.username ? 
             <div className='right-section'>
-                <p>hello, </p><p id='username'>{store.username}</p>
+                <p>hello,&nbsp;</p><p id='username'>{store.username}</p>
                 <Link className='navbar-link' onClick={actions.logout}>Log out</Link>
             </div> 
             :
             <div className='right-section'>
-                <Link onClick={() => setModalShow(true)} className='navbar-link'>Register</Link>
-                <Link className='navbar-link' to="/login">Log in</Link>
-                <RegisterModal
+                {/* <Link onClick={() => setModalShow(true)} className='navbar-link'>Register</Link>
+                <Link className='navbar-link' to="/login">Log in</Link> */}
+                {/* <RegisterModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
-                />
+                /> */}
+                <LoginRegisterModal/>
             </div>
             }
 	    </div>

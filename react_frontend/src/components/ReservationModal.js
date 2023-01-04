@@ -1,0 +1,49 @@
+import React, {useState, useRef, useEffect, useContext} from 'react'
+import '../styles/ReservationModal.css'
+import Modal from 'react-bootstrap/Modal';
+import { Link } from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons";
+
+const ReservationModal = () => {
+    
+    const [show, setShow] = useState(false);
+    const [activeButton, setActiveButton] = useState('login-button')
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const switchActive = event => {
+        setActiveButton(event.target.dataset.button)
+    }
+    
+    return (
+        <>
+          <Link className='navbar-link' onClick={handleShow}>
+              <FontAwesomeIcon className='icon' icon={faUser}/> Pokaż modal
+          </Link>
+    
+          <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                  <Modal.Title>Logowanie / rejestracja</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                  <div className='login-register-navigation'>
+                      <button data-button='login-button' 
+                      className={activeButton === 'login-button' ? 'active' : ''} onClick={switchActive}>
+                          ZALOGUJ SIĘ
+                      </button>
+                      <button data-button='register-button'
+                      className={activeButton === 'register-button' ? 'active' : ''} onClick={switchActive}>
+                          UTWÓRZ KONTO
+                      </button>
+                  </div>
+                  <div className='login-register-form'>
+                  </div>
+              </Modal.Body>
+          </Modal>
+        </>
+      );
+}
+
+export default ReservationModal

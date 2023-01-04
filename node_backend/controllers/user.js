@@ -1,18 +1,23 @@
 import { db } from "../db.js"
-import { hashPassword, correctEmail, comparePaswords } from "../utils.js"
+import { hashPassword, correctEmail, comparePaswords, correctPasswords } from "../utils.js"
 import jwt from "jsonwebtoken"
 
 export const register = (req, res) => {
     const email = req.body.email
     const password = req.body.password
     const username = req.body.username
+    const confirmPassword = req.body.confirmPassword
 
     if (!(email && password && username)) {
-        res.send({message: "Missing fields. Please try again"})
+        res.send({message: "Nie wszystkie pola są wypełnione. Spróbuj ponownie"})
         return
     }
     if (!correctEmail(email)) {
-        res.send({message: "Invalid email address. Please try again"})
+        res.send({message: "Nieprawidłowy adres email. Spróbuj ponownie"})
+        return
+    }
+    if (!correctPasswords(password, confirmPassword)) {
+        res.send({message: "Hasła nie są identyczne. Spróbuj ponownie"})
         return
     }
     if (username && email && password) {
@@ -31,7 +36,8 @@ export const register = (req, res) => {
                 } else {
                     res.send({
                         error: false,
-                        message: 'Użytkownik został zarejestrowany pomyślnie.'
+                        message: 'Użytkownik został zarejestrowany pomyślnie.',
+                        registered: true
                     });
                 }   
             })
@@ -54,7 +60,7 @@ export const login = (req, res) => {
     const password = req.body.password
     
     if (!(email && password)) {
-        res.send({message: "Missing data. Please try again"})
+        res.send({message: "Nie wszystkie pola są wypełnione. Spróbuj ponownie"})
         return
     }
     const sql = `SELECT * FROM user WHERE email = '${email}'`
@@ -66,7 +72,7 @@ export const login = (req, res) => {
             return
         }
         if (results.length === 0) {
-            res.send({message: "Dane nieprawidłowe"})
+            res.send({message: "Dane nieprawidłowe. Spróbuj ponownie"})
             return
         }
         results.map(result => {
@@ -95,7 +101,7 @@ export const login = (req, res) => {
                     })
                 }
                 else {
-                    res.send({message: "Dane nieprawidłowe"})
+                    res.send({message: "Dane nieprawidłowe. Spróbuj ponownie"})
                 }
             })
         })

@@ -13,6 +13,10 @@ export const comparePaswords = (password, hashedPassword) => {
     return bcrypt.compare(password, hashedPassword)
 }
 
+export const correctPasswords = (password, confirmPassword) => {
+    return password === confirmPassword
+}
+
 export const correctEmail = (email) => {
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     return regex.test(email)
