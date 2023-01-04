@@ -40,7 +40,6 @@ const HomeForm = () => {
               <div className="home-form-description">
                   <h1>Odkrywaj lokalną gastronomię</h1>
                   <h2>Zarezerwuj miejsce</h2>
-                  <ReservationModal/>
               </div>
               <div className="home-form-dropdown">
                 <DropdownButton id="dropdown-item-button" title={locationValue}>

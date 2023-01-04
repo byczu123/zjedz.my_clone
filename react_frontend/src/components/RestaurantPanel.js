@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Context } from '../context/appContext';
 import '../styles/RestaurantPanel.css'
 import restaurantLogo from '../assets/cojes.jpg'
+import ReservationModal from './ReservationModal';
 
 const RestaurantPanel = () => {
 
@@ -31,7 +32,15 @@ const RestaurantPanel = () => {
                 // console.log('WARUNEK SPEŁNIONY')
                 return <div className='restaurant-container' key={index}>
                 <div className='restaurant-image-container'>
-                    <img src={restaurant.link}></img>
+                    <Link to={`/restaurant/${restaurant.restaurant_id}`} 
+                            state={{
+                            name: restaurant.name,
+                            menuId: restaurant.menu_id,
+                            location: restaurant.location,
+                            description: restaurant.description
+                            }}>
+                        <img src={restaurant.link}></img>
+                    </Link> 
                     <div className='restaurant-image-description'>
                         <p>{restaurant.location}</p>
                     </div>
@@ -60,14 +69,7 @@ const RestaurantPanel = () => {
                 
                 {/* <p className='restaurant_description'>{restaurant.description}</p> */}
                 <div className='restaurant-link-container'>
-                   <Link className='restaurant_link' to={`/restaurant/${restaurant.restaurant_id}`} 
-                        state={{
-                        name: restaurant.name,
-                        menuId: restaurant.menu_id,
-                        location: restaurant.location,
-                        description: restaurant.description
-                        }}>Strona restauracji
-                    </Link> 
+                   <ReservationModal restaurantName={restaurant.name}/> 
                 </div>
                 
             </div>
