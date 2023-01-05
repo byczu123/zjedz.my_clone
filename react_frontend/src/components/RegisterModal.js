@@ -12,7 +12,7 @@ function RegisterModal(props) {
   const emailInput = useRef()
   const passwordInput = useRef()
   const usernameInput = useRef()
-  const {store, actions} = useContext(Context)
+  const { store, actions } = useContext(Context)
 
   const [message, setMessage] = useState(null)
 
@@ -23,12 +23,12 @@ function RegisterModal(props) {
     }
   }, [store.email, store.username])
 
-  
+
   const submitRegistration = () => {
     const username = usernameInput.current.value
     const email = emailInput.current.value
     const password = passwordInput.current.value
-  
+
     const options = {
       method: 'POST',
       headers: {
@@ -41,16 +41,16 @@ function RegisterModal(props) {
       })
     }
     fetch('/auth/register', options)
-    .then(res => {
-      if (res.status === 200) return res.json()
-    })
-    .then(data => {
-      console.log(data)
-      setMessage(data.message)
-      if(data.message === 'Użytkownik został zarejestrowany pomyślnie.') {
-        navigate('/login')
-      }
-    })
+      .then(res => {
+        if (res.status === 200) return res.json()
+      })
+      .then(data => {
+        console.log(data)
+        setMessage(data.message)
+        if (data.message === 'Użytkownik został zarejestrowany pomyślnie.') {
+          navigate('/login')
+        }
+      })
   }
 
   return (
@@ -66,10 +66,10 @@ function RegisterModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <input name="username" className='register-input' placeholder="Username" type="text" ref={usernameInput}></input>
-              <input name="email" className='register-input' placeholder="E-mail" type="text" ref={emailInput}></input>
-              <input name="password" className='register-input' placeholder="Password" type="password" ref={passwordInput}></input>
-              <button onClick={submitRegistration}>Confirm</button>
+        <input name="username" className='register-input' placeholder="Username" type="text" ref={usernameInput}></input>
+        <input name="email" className='register-input' placeholder="E-mail" type="text" ref={emailInput}></input>
+        <input name="password" className='register-input' placeholder="Password" type="password" ref={passwordInput}></input>
+        <button onClick={submitRegistration}>Confirm</button>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
