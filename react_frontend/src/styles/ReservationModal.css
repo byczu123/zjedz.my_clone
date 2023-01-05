@@ -1,0 +1,95 @@
+/* @media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 60vw !important;
+    }
+} */
+
+.reservation-modal-header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/cojes.jpg");
+    height: 10vh;
+    background-size: cover;
+    border: 0.5px solid white;
+    /* border-top-left-radius: 60px; */
+}
+
+.reservation-modal-navigation button {
+    width: 50%;
+    font-size: 1.2rem;
+    border: none;
+    background-color: white;
+}
+
+.reservation-title-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reservation-modal-navigation .active {
+    border-bottom: 4px solid var(--secondary-text-color);
+}
+
+.reservation-modal-title {
+    color: white;
+    /* font-weight: 300 !important; */
+    font-size: 2rem !important;
+}
+
+#reservation-dropdown-button {
+    background-color: white;
+    color: black;
+    border: 0.5px solid lightgrey;
+    border-radius: 60px;
+    margin: 2rem 1rem;
+    width: 10vw;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.reservation-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.reservation-pagination {
+    display: flex;
+    overflow-x: auto;
+}
+
+.pagination-button {
+    margin: 2%;
+    padding: 1%;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 0.5px solid lightgray;
+    font-size: 1.2rem;
+}
+
+.pagination-button:not(.active):hover {
+    color: white;
+    background-color: black;
+}
+
+.pagination-button.active {
+    background-color: var(--secondary-text-color);
+    border: 0.5px solid var(--secondary-text-color);
+}
+
+.reservation-next {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#next-reservation {
+    margin: 5%;
+    width: 30%;
+    background-color: var(--secondary-text-color);
+    font-size: 1.5rem;
+    border-radius: 60px;
+    border: none;
+}

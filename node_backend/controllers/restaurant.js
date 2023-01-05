@@ -12,3 +12,17 @@ export const getRestaurants = (req, res) => {
         return
     })
 }
+
+export const getRestaurant = (req, res) => {
+    const restaurant_id = req.params.restaurant_id
+    const sql = `SELECT restaurant_id, name, location, menu_id, description, link FROM restaurant WHERE restaurant_id='${restaurant_id}';`
+    db.query(sql, (error, results) => {
+        if (error) {
+            console.log(error)
+            res.send({message: "Wystąpił błąd"})
+            return
+        }
+        res.send(JSON.stringify(results))
+        return
+    })
+}
