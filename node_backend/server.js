@@ -3,6 +3,7 @@ import restaurantRoutes from "./views/restaurant.js"
 import menuRoutes from "./views/menu.js"
 import tableRoutes from "./views/table.js"
 import dataRoutes from "./views/data.js"
+import reservationRoutes from "./views/reservation.js"
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
@@ -27,5 +28,6 @@ app.use('/restaurant', restaurantRoutes)
 app.use('/menu', menuRoutes)
 app.use('/table', tableRoutes)
 app.use('/data', dataRoutes)
+app.use('/reservation', reservationRoutes)
 
 app.listen(5000, () => console.log('Server has started (port 5000)'))

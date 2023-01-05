@@ -78,16 +78,16 @@
     border: 0.5px solid var(--secondary-text-color);
 }
 
-.reservation-confirm {
+.reservation-next {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
-#confirm-reservation {
+#next-reservation {
     margin: 5%;
-    width: 50%;
+    width: 30%;
     background-color: var(--secondary-text-color);
     font-size: 1.5rem;
     border-radius: 60px;

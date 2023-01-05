@@ -19,6 +19,8 @@ const ReservationModal = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const restaurantName = props.restaurantName
+    
     const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
     const people = ["2 osoby", "3 osoby", "4 osoby", "5 osób", "6 osób"]
 
@@ -41,7 +43,7 @@ const ReservationModal = (props) => {
           <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton className='reservation-modal-header'>
                     <div className='reservation-title-container'>
-                        <Modal.Title className='reservation-modal-title'>{props.restaurantName}</Modal.Title>
+                        <Modal.Title className='reservation-modal-title'>{restaurantName}</Modal.Title>
                     </div>
               </Modal.Header>
               <Modal.Body className='reservation-modal'>
@@ -77,12 +79,12 @@ const ReservationModal = (props) => {
                         }}>{hour}</button>
                     })}
                     </div>
-                    <div className='reservation-confirm'>
-                        <button id='confirm-reservation'>POTWIERDŹ</button>
+                    <div className='reservation-next'>
+                        <button id='next-reservation' onClick={() => {setActiveButton("reservation-sumup-button")}}>Dalej</button>
                     </div>
                     </>
                     :
-                    <ReservationSummary hour={hour} date={date} peopleValue={peopleValue}/>
+                    <ReservationSummary hour={hour} date={date} peopleValue={peopleValue} restaurantName={restaurantName}/>
                     }
               </Modal.Body>
           </Modal>
