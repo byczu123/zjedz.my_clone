@@ -9,7 +9,7 @@
     height: 10vh;
     background-size: cover;
     border: 0.5px solid white;
-    border-top-left-radius: 60px;
+    /* border-top-left-radius: 60px; */
 }
 
 .reservation-modal-navigation button {
@@ -54,14 +54,42 @@
     width: 100%;
 }
 
-.reservation-pagination .pagination {
-    overflow-y: hidden;
+.reservation-pagination {
+    display: flex;
+    overflow-x: auto;
 }
 
-.reservation-pagination .pagination .page-link {
-    border-radius: 60px;
+.pagination-button {
+    margin: 2%;
+    padding: 1%;
+    border-radius: 10px;
     background-color: transparent;
-    color: black;
-    border: 0.5px solid lightgrey;
-    width: 3vw;
+    border: 0.5px solid lightgray;
+    font-size: 1.2rem;
+}
+
+.pagination-button:not(.active):hover {
+    color: white;
+    background-color: black;
+}
+
+.pagination-button.active {
+    background-color: var(--secondary-text-color);
+    border: 0.5px solid var(--secondary-text-color);
+}
+
+.reservation-confirm {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#confirm-reservation {
+    margin: 5%;
+    width: 50%;
+    background-color: var(--secondary-text-color);
+    font-size: 1.5rem;
+    border-radius: 60px;
+    border: none;
 }

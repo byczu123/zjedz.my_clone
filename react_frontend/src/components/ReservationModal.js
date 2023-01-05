@@ -2,11 +2,10 @@ import React, {useState, useRef, useEffect, useContext} from 'react'
 import '../styles/ReservationModal.css'
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser} from "@fortawesome/free-solid-svg-icons";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Dropdown } from 'react-bootstrap'
-import { Pagination } from 'react-bootstrap';
+import ReservationSummary from './ReservationSummary';
+
 
 const ReservationModal = (props) => {
     
@@ -14,12 +13,24 @@ const ReservationModal = (props) => {
     const [date, setDate] = useState(new Date().toISOString().split('T')[0])
     const [peopleValue, setPeopleValue] = useState("2 osoby")
     const [hour, setHour] = useState("14:00")
+    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeButton, setActiveButton] = useState('reservation-data-button')
     
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
     const people = ["2 osoby", "3 osoby", "4 osoby", "5 osób", "6 osób"]
+
+    console.log('ReservationModal rendered. Parameters', activeIndex, hour, date)
+
+    const switchActiveHour = (index) => {
+        setActiveIndex(index)
+    }
+
+    const switchActiveNavigation = event => {
+        setActiveButton(event.target.dataset.button)
+    }
 
     return (
         <>
@@ -35,10 +46,17 @@ const ReservationModal = (props) => {
               </Modal.Header>
               <Modal.Body className='reservation-modal'>
                   <div className='reservation-modal-navigation' style={{display: 'flex', justifyContent: 'center'}}>
-                      <button className='active'>
-                          DOKONAJ REZERWACJI
-                      </button>
+                  <button data-button='reservation-data-button' 
+                    className={activeButton === 'reservation-data-button' ? 'active' : ''} onClick={switchActiveNavigation}>
+                        REZERWACJA
+                    </button>
+                    <button data-button='reservation-sumup-button'
+                    className={activeButton === 'reservation-sumup-button' ? 'active' : ''} onClick={switchActiveNavigation}>
+                        PODSUMOWANIE
+                    </button>
                   </div>
+                  { activeButton === 'reservation-data-button' ?
+                    <>
                   <div className='reservation-form'>
                     <input type="date" id="reservation-dropdown-button" value={date} onChange={(e) => {setDate(e.target.value)}}></input>
                     <DropdownButton id="reservation-dropdown-button" title={peopleValue}>
@@ -52,18 +70,20 @@ const ReservationModal = (props) => {
                     </DropdownButton>
                   </div>
                   <div className='reservation-pagination'>
-                    <Pagination>
-                        <Pagination.Prev />
-                        <Pagination.Item>{1}</Pagination.Item>
-                        <Pagination.Item>{10}</Pagination.Item>
-                        <Pagination.Item>{11}</Pagination.Item>
-                        <Pagination.Item active>{12}</Pagination.Item>
-                        <Pagination.Item>{13}</Pagination.Item>
-                        <Pagination.Item disabled>{14}</Pagination.Item>
-                        <Pagination.Item>{20}</Pagination.Item>
-                        <Pagination.Next />
-                    </Pagination>
+                    {hours.map((hour, index) => {
+                        return <button key={index} className={`pagination-button ${index === activeIndex ? 'active' : ''}`} onClick={(e) => {
+                            switchActiveHour(index)
+                            setHour(e.target.innerHTML)
+                        }}>{hour}</button>
+                    })}
                     </div>
+                    <div className='reservation-confirm'>
+                        <button id='confirm-reservation'>POTWIERDŹ</button>
+                    </div>
+                    </>
+                    :
+                    <ReservationSummary hour={hour} date={date} peopleValue={peopleValue}/>
+                    }
               </Modal.Body>
           </Modal>
         </>
