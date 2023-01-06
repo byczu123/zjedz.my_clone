@@ -1,3 +1,5 @@
+/* CSS for RestaurantPanel and Restaurant components */
+
 .grid_help{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
