@@ -32,7 +32,11 @@ export const submitReservation = (req, res) => {
 export const getFirstHours = (req, res) => {
     const restaurantId = req.body.restaurantId
     const currentDate = req.body.currentDate
-    const sql = `SELECT DISTINCT hour FROM reservation WHERE restaurant_id = '${restaurantId}' AND date = '${currentDate}' ORDER BY hour ASC LIMIT 4`
+    const currentPeople = req.body.currentPeople
+    const sql = `SELECT DISTINCT hour FROM reservation 
+    WHERE restaurant_id = '${restaurantId}' AND date = '${currentDate}' AND people = '${currentPeople}' 
+    ORDER BY hour ASC 
+    LIMIT 4`
     db.query(sql, (error, results) => {
         if (error) {
             console.log(error)

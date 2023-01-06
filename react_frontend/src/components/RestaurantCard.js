@@ -7,6 +7,8 @@ import { Context } from '../context/appContext'
 const RestaurantCard = (props) => {
     
     const {store, actions} = useContext(Context)
+    const [showModal, setShowModal] = useState(false)
+    const [activeModalIndex, setActiveModalIndex] = useState(null)
  
     const restaurantName = props.restaurantName
     const menuId = props.menuId
@@ -15,12 +17,12 @@ const RestaurantCard = (props) => {
     const restaurantLink = props.restaurantLink
     const restaurantId = props.restaurantId
 
-    const [firstHours, setFirstHours] = useState([
-        {hour: "14:00"}, 
-        {hour: "14:30"}, 
-        {hour: "15:00"}, 
-        {hour: "15:30"}
-    ])
+    const [firstHours, setFirstHours] = useState(null)
+
+    const handleModal = (index) => {
+        setShowModal(true)
+        setActiveModalIndex(index)
+    }
 
     const getFirstHours = () => {
         const options = {
@@ -30,7 +32,8 @@ const RestaurantCard = (props) => {
             },
             body: JSON.stringify({
                 restaurantId: restaurantId,
-                currentDate: store.currentDate
+                currentDate: store.currentDate,
+                currentPeople: store.currentPeople
             })
         }
         fetch('/reservation/first-hours', options)
@@ -47,7 +50,7 @@ const RestaurantCard = (props) => {
         getFirstHours()
     }, [store.currentLocation, store.currentDate, store.currentHour, store.currentPeople])
 
-    console.log('RestaurantCard for ', restaurantName, ' rendered')
+    console.log('RestaurantCard for ', restaurantName, ' rendered', showModal)
     
     return (
         <div className='restaurant-container'>
@@ -68,19 +71,22 @@ const RestaurantCard = (props) => {
             <div className='restaurant-description'>
                 <h2 className='restaurant_name'>{restaurantName}</h2>
                 <h3>Rezerwacja stolika</h3>
-                <h4>najbliższe godziny {store.currentDate}</h4>
+                <h4>najbliższe godziny {store.currentDate} dla {store.currentPeople} osób</h4>
             </div>
             <div className='restaurant-hours-container'>
                 <div className='restaurant-hours'>
-                    {firstHours.length > 0 && firstHours.map((firstHour, index)=> {
-                        return <button key={index} className='restaurant-hour-button'>
+                    {firstHours && firstHours.map((firstHour, index)=> {
+                        return <button key={index} className='restaurant-hour-button' onClick={() => handleModal(index)}>
                             {firstHour.hour}
                         </button>
                     })}
                 </div>
             </div>
             <div className='restaurant-link-container'>
-                <ReservationModal restaurantName={restaurantName} />
+                <Link className='restaurant_link' onClick={() => handleModal(0)}>
+                    ZAREZERWUJ
+                </Link> 
+                <ReservationModal restaurantName={restaurantName} show={showModal} onHide={() => setShowModal(false)} activeIndex={activeModalIndex}/>
             </div>
         </div>
     )

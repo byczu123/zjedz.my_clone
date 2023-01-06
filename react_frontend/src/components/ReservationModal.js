@@ -9,22 +9,22 @@ import ReservationSummary from './ReservationSummary';
 
 const ReservationModal = (props) => {
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(props.show);
     const [date, setDate] = useState(new Date().toISOString().split('T')[0])
     const [peopleValue, setPeopleValue] = useState("2 osoby")
     const [hour, setHour] = useState("14:00")
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(props.activeIndex)
     const [activeButton, setActiveButton] = useState('reservation-data-button')
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
     const restaurantName = props.restaurantName
     
     const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
     const people = ["2 osoby", "3 osoby", "4 osoby", "5 osób", "6 osób"]
 
-    console.log('ReservationModal rendered. Parameters', activeIndex, hour, date)
+    console.log('ReservationModal rendered. Parameters', activeIndex, hour, date, ' show: ', show)
 
     const switchActiveHour = (index) => {
         setActiveIndex(index)
@@ -34,13 +34,14 @@ const ReservationModal = (props) => {
         setActiveButton(event.target.dataset.button)
     }
 
+    useEffect(() => {
+        setShow(props.show)
+        setActiveIndex(props.activeIndex)
+    }, [props.show, props.activeIndex])
+
     return (
         <>
-            <Link className='restaurant_link' onClick={handleShow}>
-                ZAREZERWUJ
-            </Link>
-
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={props.onHide}>
                 <Modal.Header closeButton className='reservation-modal-header'>
                     <div className='reservation-title-container'>
                         <Modal.Title className='reservation-modal-title'>{restaurantName}</Modal.Title>
