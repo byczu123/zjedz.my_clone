@@ -1,16 +1,51 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/RestaurantPanel.css'
 import { Link } from 'react-router-dom'
 import ReservationModal from './ReservationModal'
+import { Context } from '../context/appContext'
 
 const RestaurantCard = (props) => {
     
+    const {store, actions} = useContext(Context)
+ 
     const restaurantName = props.restaurantName
     const menuId = props.menuId
     const restaurantLocation = props.restaurantLocation
     const restaurantDescription = props.restaurantDescription
     const restaurantLink = props.restaurantLink
     const restaurantId = props.restaurantId
+
+    const [firstHours, setFirstHours] = useState([
+        {hour: "14:00"}, 
+        {hour: "14:30"}, 
+        {hour: "15:00"}, 
+        {hour: "15:30"}
+    ])
+
+    const getFirstHours = () => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                restaurantId: restaurantId,
+                currentDate: store.currentDate
+            })
+        }
+        fetch('/reservation/first-hours', options)
+            .then(res => {
+                if (res.status === 200) return res.json()
+            })
+            .then(data => {
+                setFirstHours(data.hours)
+                console.log('Ustawiono godziny dla restauracji na ', firstHours)
+            })
+    }
+
+    useEffect(() => {
+        getFirstHours()
+    }, [store.currentLocation, store.currentDate, store.currentHour, store.currentPeople])
 
     console.log('RestaurantCard for ', restaurantName, ' rendered')
     
@@ -33,22 +68,15 @@ const RestaurantCard = (props) => {
             <div className='restaurant-description'>
                 <h2 className='restaurant_name'>{restaurantName}</h2>
                 <h3>Rezerwacja stolika</h3>
-                <h4>najbliższe godziny dziś</h4>
+                <h4>najbliższe godziny {store.currentDate}</h4>
             </div>
             <div className='restaurant-hours-container'>
                 <div className='restaurant-hours'>
-                    <button className='restaurant-hour-button'>
-                        14:30
-                    </button>
-                    <button className='restaurant-hour-button'>
-                        14:30
-                    </button>
-                    <button className='restaurant-hour-button'>
-                        14:30
-                    </button>
-                    <button className='restaurant-hour-button'>
-                        14:30
-                    </button>
+                    {firstHours.length > 0 && firstHours.map((firstHour, index)=> {
+                        return <button key={index} className='restaurant-hour-button'>
+                            {firstHour.hour}
+                        </button>
+                    })}
                 </div>
             </div>
             <div className='restaurant-link-container'>

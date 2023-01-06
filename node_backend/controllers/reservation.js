@@ -28,3 +28,27 @@ export const submitReservation = (req, res) => {
         }   
     })
 }
+
+export const getFirstHours = (req, res) => {
+    const restaurantId = req.body.restaurantId
+    const currentDate = req.body.currentDate
+    const sql = `SELECT DISTINCT hour FROM reservation WHERE restaurant_id = '${restaurantId}' AND date = '${currentDate}' ORDER BY hour ASC LIMIT 4`
+    db.query(sql, (error, results) => {
+        if (error) {
+            console.log(error)
+            res.send({
+                error: true,
+                message: `Wystąpił błąd podczas wybierania godzin dla ${restaurantId}.`
+                
+            });
+        } else {
+            console.log(results)
+            res.send({
+                error: false,
+                message: 'Godziny pobrane.',
+                hours: results,
+                registered: true
+            });
+        }   
+    })
+}
