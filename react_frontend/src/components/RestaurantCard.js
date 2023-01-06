@@ -86,7 +86,12 @@ const RestaurantCard = (props) => {
                 <Link className='restaurant_link' onClick={() => handleModal(0)}>
                     ZAREZERWUJ
                 </Link> 
-                <ReservationModal restaurantName={restaurantName} show={showModal} onHide={() => setShowModal(false)} activeIndex={activeModalIndex}/>
+                <ReservationModal 
+                restaurantName={restaurantName} 
+                show={showModal} 
+                onHide={() => setShowModal(false)} 
+                activeIndex={activeModalIndex}
+                currentPeople={store.currentPeople}/>
             </div>
         </div>
     )

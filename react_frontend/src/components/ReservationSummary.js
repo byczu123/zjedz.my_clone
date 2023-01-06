@@ -5,7 +5,7 @@ const ReservationSummary = (props) => {
 
     const hour = props.hour
     const date = props.date
-    const peopleValue = props.peopleValue.split(' ')[0]
+    const peopleValue = props.peopleValue
     const restaurantName = props.restaurantName
     // const restaurantId = 
 

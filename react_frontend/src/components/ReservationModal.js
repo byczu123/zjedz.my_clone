@@ -5,15 +5,21 @@ import { Link } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Dropdown } from 'react-bootstrap'
 import ReservationSummary from './ReservationSummary';
+import { Context } from '../context/appContext';
 
 
 const ReservationModal = (props) => {
+    
+    const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
+    const people = [2, 4, 6]
+    
+    const {store, actions} = useContext(Context)
 
     const [show, setShow] = useState(props.show);
     const [date, setDate] = useState(new Date().toISOString().split('T')[0])
-    const [peopleValue, setPeopleValue] = useState("2 osoby")
-    const [hour, setHour] = useState("14:00")
+    const [currentPeople, setCurrentPeople] = useState(store.currentPeople)
     const [activeIndex, setActiveIndex] = useState(props.activeIndex)
+    const [hour, setHour] = useState(hours[activeIndex])
     const [activeButton, setActiveButton] = useState('reservation-data-button')
 
     // const handleClose = () => setShow(false);
@@ -21,9 +27,6 @@ const ReservationModal = (props) => {
 
     const restaurantName = props.restaurantName
     
-    const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
-    const people = ["2 osoby", "3 osoby", "4 osoby", "5 osób", "6 osób"]
-
     console.log('ReservationModal rendered. Parameters', activeIndex, hour, date, ' show: ', show)
 
     const switchActiveHour = (index) => {
@@ -38,6 +41,14 @@ const ReservationModal = (props) => {
         setShow(props.show)
         setActiveIndex(props.activeIndex)
     }, [props.show, props.activeIndex])
+
+    useEffect(() => {
+        setHour(hours[activeIndex])
+    }, [activeIndex])
+
+    useEffect(() => {
+        setCurrentPeople(store.currentPeople)
+    }, [store.currentPeople])
 
     return (
         <>
@@ -62,21 +73,22 @@ const ReservationModal = (props) => {
                     <>
                   <div className='reservation-form'>
                     <input type="date" id="reservation-dropdown-button" value={date} onChange={(e) => {setDate(e.target.value)}}></input>
-                    <DropdownButton id="reservation-dropdown-button" title={peopleValue}>
+                    <DropdownButton id="reservation-dropdown-button" title={`${currentPeople} ${currentPeople !== 6 ? 'osoby' : 'osób'}`}>
                         {
                         people && people.map((value, index) => {
                             return <Dropdown.Item key={index} as="button" onClick={() => {
-                            setPeopleValue(value)
-                            }}>{value}</Dropdown.Item>
+                            setCurrentPeople(value)
+                            }}>{`${value} ${value !== 6 ? 'osoby' : 'osób'}`}</Dropdown.Item>
                         }) 
                         }
                     </DropdownButton>
                   </div>
                   <div className='reservation-pagination'>
                     {hours.map((hour, index) => {
-                        return <button key={index} className={`pagination-button ${index === activeIndex ? 'active' : ''}`} onClick={(e) => {
+                        return <button key={index} name='active-hour' className={`pagination-button ${index === activeIndex ? 'active-hour' : ''}`} onClick={(e) => {
                             switchActiveHour(index)
                             setHour(e.target.innerHTML)
+                            console.log('Aktywna godzina to ', e.target.innerHTML)
                         }}>{hour}</button>
                     })}
                     </div>
@@ -85,7 +97,7 @@ const ReservationModal = (props) => {
                     </div>
                     </>
                     :
-                    <ReservationSummary hour={hour} date={date} peopleValue={peopleValue} restaurantName={restaurantName}/>
+                    <ReservationSummary hour={hour} date={date} peopleValue={currentPeople} restaurantName={restaurantName}/>
                     }
                 </Modal.Body>
             </Modal>

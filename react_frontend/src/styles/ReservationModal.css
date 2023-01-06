@@ -68,12 +68,12 @@
     font-size: 1.2rem;
 }
 
-.pagination-button:not(.active):hover {
+.pagination-button:not(.active-hour):hover {
     color: white;
     background-color: black;
 }
 
-.pagination-button.active {
+.pagination-button.active-hour {
     background-color: var(--secondary-text-color);
     border: 0.5px solid var(--secondary-text-color);
 }
