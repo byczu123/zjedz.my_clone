@@ -4,6 +4,7 @@ import { Context } from '../context/appContext';
 import '../styles/RestaurantPanel.css'
 import restaurantLogo from '../assets/cojes.jpg'
 import ReservationModal from './ReservationModal';
+import RestaurantCard from './RestaurantCard';
 
 const RestaurantPanel = (props) => {
 
@@ -43,56 +44,17 @@ const RestaurantPanel = (props) => {
 
     return (
         <div className='grid_help'>
-            {
-                restaurants && restaurants.map((restaurant, index) => {
-                        return <div className='restaurant-container' key={index}>
-                            <div className='restaurant-image-container'>
-                                <Link to={`/restaurant/${restaurant.restaurant_id}`}
-                                    state={{
-                                        name: restaurant.name,
-                                        menuId: restaurant.menu_id,
-                                        location: restaurant.location,
-                                        description: restaurant.description
-                                    }}>
-                                    <img src={restaurant.link}></img>
-                                </Link>
-                                <div className='restaurant-image-description'>
-                                    <p>{restaurant.location}</p>
-                                </div>
-                            </div>
-                            <div className='restaurant-description'>
-                                <h2 className='restaurant_name'>{restaurant.name}</h2>
-                                <h3>Rezerwacja stolika</h3>
-                                <h4>najbliższe godziny dziś</h4>
-                            </div>
-                            <div className='restaurant-hours-container'>
-                                <div className='restaurant-hours'>
-                                    <button className='restaurant-hour-button'>
-                                        14:30
-                                    </button>
-                                    <button className='restaurant-hour-button'>
-                                        14:30
-                                    </button>
-                                    <button className='restaurant-hour-button'>
-                                        14:30
-                                    </button>
-                                    <button className='restaurant-hour-button'>
-                                        14:30
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* <p className='restaurant_description'>{restaurant.description}</p> */}
-                            <div className='restaurant-link-container'>
-                                <ReservationModal restaurantName={restaurant.name} />
-                            </div>
-
-                        </div>
-                    
+            {restaurants && restaurants.map((restaurant, index) => {
+                return <RestaurantCard key={index}
+                    restaurantName={restaurant.name}
+                    menuId={restaurant.menu_id}
+                    restaurantLocation={restaurant.location}
+                    restaurantDescription={restaurant.description}
+                    restaurantLink={restaurant.link}
+                    restaurantId={restaurant.restaurant_id}/>
                 })
             }
         </div>
-
     )
 }
 
