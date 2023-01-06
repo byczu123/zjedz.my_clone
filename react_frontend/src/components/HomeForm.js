@@ -3,23 +3,21 @@ import '../styles/HomeForm.css'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Dropdown } from 'react-bootstrap'
 import { Context } from '../context/appContext'
-import ReservationModal from './ReservationModal'
-
 
 const HomeForm = () => {
 
   const [locations, setLocations] = useState(null)
-  const [locationValue, setLocationValue] = useState('Wszystkie miasta')
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0])
-  const [hour, setHour] = useState("14:00")
-  const [peopleValue, setPeopleValue] = useState("2 osoby")
+  const [currentLocation, setCurrentLocation] = useState('Wszystkie miasta')
+  const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0])
+  const [currentHour, setCurrentHour] = useState("14:00")
+  const [currentPeople, setCurrentPeople] = useState(2)
 
   const { store, actions } = useContext(Context)
 
   const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
-  const people = ["2 osoby", "3 osoby", "4 osoby", "5 osób", "6 osób"]
+  const people = [2, 4, 6]
 
-  console.log('HomeForm rendered. Data: ', store.currentLocation, hour, date, peopleValue)
+  console.log('HomeForm rendered. Data from store: ', currentLocation, currentHour, currentDate, currentPeople)
 
   useEffect(() => {
     fetch('/data/get/home-form')
@@ -28,10 +26,15 @@ const HomeForm = () => {
       })
       .then(data => {
         setLocations(data)
-        // setLocationValue(data[0].location)
+        // setcurrentLocation(data[0].location)
         console.log('Location: ', data)
       })
-
+    
+    actions.setCurrentLocation(currentLocation)
+    actions.setCurrentHour(currentHour)
+    actions.setCurrentDate(currentDate)
+    actions.setCurrentPeople(currentPeople)
+    console.log('UseEffect w HomeForm jednorazowo wywołany. Ustawiono Store na wartości ', currentLocation, currentHour, currentDate, currentPeople)
   }, [])
 
   return (
@@ -42,35 +45,43 @@ const HomeForm = () => {
           <h2>Zarezerwuj miejsce</h2>
         </div>
         <div className="home-form-dropdown">
-          <DropdownButton id="dropdown-item-button" title={locationValue}>
+          <DropdownButton id="dropdown-item-button" title={currentLocation}>
             {
               locations && locations.map((value, index) => {
                 return <Dropdown.Item key={index} as="button" onClick={() => {
                   console.log(value.location)
-                  setLocationValue(value.location)
+                  setCurrentLocation(value.location)
                   actions.setCurrentLocation(value.location)
                 }}>{value.location}</Dropdown.Item>
               })
             }
           </DropdownButton>
-          {/* <DropdownButton id="dropdown-item-button" type="date" title="2022-11-21">
+          {/* <DropdownButton id="dropdown-item-button" type="currentDate" title="2022-11-21">
                 </DropdownButton> */}
-          <input type="date" id="dropdown-item-button" value={date} onChange={(e) => { setDate(e.target.value) }}></input>
-          <DropdownButton id="dropdown-item-button" title={hour}>
+          <input type="date" id="dropdown-item-button" value={currentDate} onChange={(e) => { 
+            console.log(e.target.value)
+            setCurrentDate(e.target.value)
+            actions.setCurrentDate(e.target.value)
+            }}></input>
+          <DropdownButton id="dropdown-item-button" title={currentHour}>
             {
-              hours && hours.map((hour, index) => {
+              hours && hours.map((value, index) => {
                 return <Dropdown.Item key={index} as="button" onClick={() => {
-                  setHour(hour)
-                }}>{hour}</Dropdown.Item>
+                  console.log(value)
+                  setCurrentHour(value)
+                  actions.setCurrentHour(value)
+                }}>{value}</Dropdown.Item>
               })
             }
           </DropdownButton>
-          <DropdownButton id="dropdown-item-button" title={peopleValue}>
+          <DropdownButton id="dropdown-item-button" title={`${currentPeople} ${currentPeople !== 6 ? 'osoby' : 'osób'}`}>
             {
               people && people.map((value, index) => {
                 return <Dropdown.Item key={index} as="button" onClick={() => {
-                  setPeopleValue(value)
-                }}>{value}</Dropdown.Item>
+                  console.log(value)
+                  setCurrentPeople(value)
+                  actions.setCurrentPeople(value)
+                }}>{`${value} ${value !== 6 ? 'osoby' : 'osób'}`}</Dropdown.Item>
               })
             }
           </DropdownButton>

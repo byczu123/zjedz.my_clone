@@ -4,6 +4,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			email: null,
 			username: null,
 			currentLocation: null,
+			currentDate: null,
+			currentHour: null,
+			currentPeople: null
 		},
 		actions: {
 			setUserData: (email, username) => {
@@ -13,8 +16,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				console.log('Store set. Values: ', 'email:', email, 'username:', username)
 			},
-			setCurrentLocation: (location) => {
-				setStore({currentLocation: location})
+			setCurrentLocation: (currentLocation) => {
+				setStore({currentLocation: currentLocation})
+			},
+			setCurrentDate: (currentDate) => {
+				setStore({currentDate: currentDate})
+			},
+			setCurrentHour: (currentHour) => {
+				setStore({currentHour: currentHour})
+			},
+			setCurrentPeople: (currentPeople) => {
+				setStore({currentPeople: currentPeople})
 			},
 			logout: () => {
 				const Cookies = require("js-cookie")
