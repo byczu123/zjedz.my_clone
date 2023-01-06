@@ -7,7 +7,7 @@ const ReservationSummary = (props) => {
     const date = props.date
     const peopleValue = props.peopleValue
     const restaurantName = props.restaurantName
-    // const restaurantId = 
+    const restaurantId = props.restaurantId
 
     const submitReservation = () => {
 
@@ -21,7 +21,7 @@ const ReservationSummary = (props) => {
             date: date,
             price: 500,
             peopleValue: peopleValue,
-            restaurantId: 1,
+            restaurantId: restaurantId,
             userId: 1
           })
         }
@@ -38,7 +38,7 @@ const ReservationSummary = (props) => {
 
     return (
         <div className="reservation-summary">
-            <div>{props.hour} {props.date} {props.peopleValue} {props.restaurantName}</div>
+            <div>{props.hour} {props.date} {props.peopleValue} {props.restaurantName} {restaurantId}</div>
             <div className='reservation-confirm'>
                 <button id='confirm-reservation' onClick={submitReservation}>POTWIERDŹ</button>
             </div>

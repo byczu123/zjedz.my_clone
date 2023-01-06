@@ -10,24 +10,52 @@ import { Context } from '../context/appContext';
 
 const ReservationModal = (props) => {
     
-    const hours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"]
+    const [hours, setHours] = useState([])
     const people = [2, 4, 6]
     
     const {store, actions} = useContext(Context)
 
     const [show, setShow] = useState(props.show);
-    const [date, setDate] = useState(new Date().toISOString().split('T')[0])
+    const [date, setDate] = useState(store.currentDate);
     const [currentPeople, setCurrentPeople] = useState(store.currentPeople)
     const [activeIndex, setActiveIndex] = useState(props.activeIndex)
-    const [hour, setHour] = useState(hours[activeIndex])
+    const [hour, setHour] = useState(hours && hours[activeIndex])
     const [activeButton, setActiveButton] = useState('reservation-data-button')
 
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
 
     const restaurantName = props.restaurantName
+    const restaurantId = props.restaurantId
     
     console.log('ReservationModal rendered. Parameters', activeIndex, hour, date, ' show: ', show)
+
+
+    const getPossibleHours = () => {
+        const options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                restaurantId: restaurantId,
+                currentDate: date,
+                currentPeople: currentPeople
+            })
+        }
+        fetch('/reservation/possible-hours', options)
+            .then(res => {
+                if (res.status === 200) return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                const hoursOnly = []
+                data.hours.map(object => {
+                    hoursOnly.push(object.hour)
+                })
+                setHours(hoursOnly)
+            })
+    }
 
     const switchActiveHour = (index) => {
         setActiveIndex(index)
@@ -38,13 +66,21 @@ const ReservationModal = (props) => {
     }
 
     useEffect(() => {
+        setDate(store.currentDate)
+    }, [store.currentDate])
+
+    useEffect(() => {
+        getPossibleHours()
+    }, [])
+
+    useEffect(() => {
         setShow(props.show)
         setActiveIndex(props.activeIndex)
     }, [props.show, props.activeIndex])
 
     useEffect(() => {
-        setHour(hours[activeIndex])
-    }, [activeIndex])
+        setHour(hours && hours[activeIndex])
+    }, [activeIndex, hours])
 
     useEffect(() => {
         setCurrentPeople(store.currentPeople)
@@ -84,7 +120,7 @@ const ReservationModal = (props) => {
                     </DropdownButton>
                   </div>
                   <div className='reservation-pagination'>
-                    {hours.map((hour, index) => {
+                    {hours && hours.map((hour, index) => {
                         return <button key={index} name='active-hour' className={`pagination-button ${index === activeIndex ? 'active-hour' : ''}`} onClick={(e) => {
                             switchActiveHour(index)
                             setHour(e.target.innerHTML)
@@ -97,7 +133,12 @@ const ReservationModal = (props) => {
                     </div>
                     </>
                     :
-                    <ReservationSummary hour={hour} date={date} peopleValue={currentPeople} restaurantName={restaurantName}/>
+                    <ReservationSummary 
+                    hour={hour} 
+                    date={date} 
+                    peopleValue={currentPeople} 
+                    restaurantName={restaurantName}
+                    restaurantId={restaurantId}/>
                     }
                 </Modal.Body>
             </Modal>
