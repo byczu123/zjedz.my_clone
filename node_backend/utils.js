@@ -51,3 +51,8 @@ export function deleteRows() {
     console.log(sql)
     db.query(sql)
 }
+export function createRows(){
+    const sql = 'CALL createReservationRows();'
+    console.log(sql)
+    db.query(sql)
+}
