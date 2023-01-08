@@ -10,11 +10,10 @@ import { Context } from '../context/appContext';
 
 const ReservationModal = (props) => {
     
+    const {store, actions} = useContext(Context)
+    
     const [hours, setHours] = useState([])
     const people = [2, 4, 6]
-    
-    const {store, actions} = useContext(Context)
-
     const [show, setShow] = useState(props.show);
     const [date, setDate] = useState(store.currentDate);
     const [currentPeople, setCurrentPeople] = useState(store.currentPeople)
@@ -28,7 +27,7 @@ const ReservationModal = (props) => {
     const restaurantName = props.restaurantName
     const restaurantId = props.restaurantId
     
-    console.log('ReservationModal rendered. Parameters', activeIndex, hour, date, ' show: ', show)
+    console.log('RESERVATIONMODAL ReservationModal rendered. Parameters', activeIndex, hour, date, ' show: ', show, restaurantName)
 
 
     const getPossibleHours = () => {
@@ -54,6 +53,7 @@ const ReservationModal = (props) => {
                     hoursOnly.push(object.hour)
                 })
                 setHours(hoursOnly)
+                console.log('RESERVATIONMODAL pobrano aktywne godziny dla', date, currentPeople)
             })
     }
 
@@ -67,23 +67,37 @@ const ReservationModal = (props) => {
 
     useEffect(() => {
         setDate(store.currentDate)
+        setCurrentPeople(store.currentPeople)
+        setActiveIndex(props.activeIndex)
+        setHour(hours && hours[activeIndex])
+        setActiveButton('reservation-data-button')
+        console.log('RESERVATIONMODAL DANE DEFAULTOWE', restaurantName)
+    }, [show])
+
+    useEffect(() => {
+        setDate(store.currentDate)
+        console.log('RESERVATIONMODAL Ustawiono aktywną datę', restaurantName)
     }, [store.currentDate])
 
     useEffect(() => {
         getPossibleHours()
-    }, [])
+        console.log('RESERVATIONMODAL pobrano aktywne godziny dla', date, currentPeople)
+    }, [currentPeople, date])
 
     useEffect(() => {
         setShow(props.show)
         setActiveIndex(props.activeIndex)
+        console.log('RESERVATIONMODAL Ustawiono show oraz active index na  ', props.activeIndex, restaurantName)
     }, [props.show, props.activeIndex])
 
     useEffect(() => {
         setHour(hours && hours[activeIndex])
+        console.log('RESERVATIONMODAL Ustawiono aktywną godzinę w modalu na ', hours[activeIndex], restaurantName)
     }, [activeIndex, hours])
 
     useEffect(() => {
         setCurrentPeople(store.currentPeople)
+        console.log('RESERVATIONMODAL Ustawiono aktywną liczbę osób w modalu na ', store.currentPeople, restaurantName)
     }, [store.currentPeople])
 
     return (
@@ -108,12 +122,18 @@ const ReservationModal = (props) => {
                   { activeButton === 'reservation-data-button' ?
                     <>
                   <div className='reservation-form'>
-                    <input type="date" id="reservation-dropdown-button" value={date} onChange={(e) => {setDate(e.target.value)}}></input>
+                    <input type="date" id="reservation-dropdown-button" value={date} onChange={(e) => {
+                        setDate(e.target.value)
+                        // getPossibleHours()
+                        setActiveIndex(0)
+                        }}></input>
                     <DropdownButton id="reservation-dropdown-button" title={`${currentPeople} ${currentPeople !== 6 ? 'osoby' : 'osób'}`}>
                         {
                         people && people.map((value, index) => {
                             return <Dropdown.Item key={index} as="button" onClick={() => {
                             setCurrentPeople(value)
+                            // getPossibleHours()
+                            setActiveIndex(0)
                             }}>{`${value} ${value !== 6 ? 'osoby' : 'osób'}`}</Dropdown.Item>
                         }) 
                         }
@@ -124,7 +144,9 @@ const ReservationModal = (props) => {
                         return <button key={index} name='active-hour' className={`pagination-button ${index === activeIndex ? 'active-hour' : ''}`} onClick={(e) => {
                             switchActiveHour(index)
                             setHour(e.target.innerHTML)
-                            console.log('Aktywna godzina to ', e.target.innerHTML)
+                            // console.log('Aktywna godzina to ', e.target.innerHTML)
+                            // getPossibleHours()
+                            // setActiveIndex(0)
                         }}>{hour}</button>
                     })}
                     </div>
