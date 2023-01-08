@@ -47,10 +47,11 @@ const RestaurantCard = (props) => {
     }
 
     useEffect(() => {
+        setFirstHours([])
         getFirstHours()
-    }, [store.currentLocation, store.currentDate, store.currentHour, store.currentPeople])
+    }, [restaurantId, store.currentLocation, store.currentDate, store.currentHour, store.currentPeople])
 
-    console.log('RestaurantCard for', restaurantName, 'rendered', firstHours, store.currentPeople)
+    console.log('RestaurantCard for', restaurantName, 'rendered', store.currentPeople, store.currentDate, store.currentHour, firstHours)
     
     return (
         <div className='restaurant-container'>

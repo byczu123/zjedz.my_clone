@@ -28,6 +28,10 @@ function HomePage(){
    // }, [store.location, store.hour])
    // console.log('HomePage rendered. Store: ', store.email, store.username, locationValue)
 
+   useEffect(() => {
+      console.log('HomePage rendered due to store change')
+   }, [store.currentLocation, store.currentDate, store.currentHour, store.currentPeople])
+
    return(
       <div className="home-container">
          <div className="home-header">
@@ -36,11 +40,7 @@ function HomePage(){
          </div>
          <p className="rest_paragraph">Polecane restauracje</p>
          <div className="home-restaurants-section">
-            <RestaurantPanel 
-            currentLocation={store.currentLocation}
-            currentPeople={store.currentPeople}
-            currentHour={store.currentHour}
-            currentDate={store.currentDate}/>
+            <RestaurantPanel/>
          </div>
          <div className="home-footer">
 
