@@ -30,3 +30,29 @@ export const usernameExists = (username) => {
         return results.length > 0;
     })
 }
+
+export const formatDate = (date) => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+export function deleteRows() {
+    let today = new Date();
+    const ftoday = formatDate(today)
+    const sql = `CALL deleteExpiredRows('${ftoday}');`
+    console.log(sql)
+    db.query(sql)
+}
+export function createRows(){
+    const sql = 'CALL createReservationRows();'
+    console.log(sql)
+    db.query(sql)
+}

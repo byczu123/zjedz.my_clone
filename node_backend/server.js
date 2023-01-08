@@ -9,6 +9,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import bodyParser from "body-parser"
 import { db } from "./db.js"
+import { deleteRows,createRows } from "./utils.js"
 
 
 const app = express()
@@ -16,6 +17,8 @@ const app = express()
 db.connect( error => {
     if (error) console.log(error)
     else console.log('Polaczono z bazka')
+    deleteRows()
+    createRows()
 })
 
 app.use(cors())
