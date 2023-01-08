@@ -10,7 +10,7 @@ export const getRestaurants = (req, res) => {
     JOIN reservation res 
     ON r.restaurant_id = res.restaurant_id
     ${currentLocation !== "Wszystkie miasta" ? "WHERE r.location = '" + currentLocation + "'" : ""}
-    AND res.hour = '${currentHour}' AND res.date = '${currentDate}' AND res.people = '${currentPeople}'`
+    AND res.hour = '${currentHour}' AND res.date = '${currentDate}' AND res.people = '${currentPeople}' AND res.user_id IS NULL`
     console.log(sql)
     db.query(sql, (error, results) => {
         if (error) {

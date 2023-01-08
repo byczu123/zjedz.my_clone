@@ -42,7 +42,7 @@ const RestaurantCard = (props) => {
             })
             .then(data => {
                 setFirstHours(data.hours)
-                console.log('Ustawiono godziny dla restauracji na ', firstHours)
+                console.log('Ustawiono godziny dla restauracji', restaurantName, 'na', firstHours, store.currentPeople)
             })
     }
 
@@ -50,7 +50,7 @@ const RestaurantCard = (props) => {
         getFirstHours()
     }, [store.currentLocation, store.currentDate, store.currentHour, store.currentPeople])
 
-    console.log('RestaurantCard for ', restaurantName, ' rendered', showModal)
+    console.log('RestaurantCard for', restaurantName, 'rendered', firstHours, store.currentPeople)
     
     return (
         <div className='restaurant-container'>
@@ -87,11 +87,13 @@ const RestaurantCard = (props) => {
                     ZAREZERWUJ
                 </Link> 
                 <ReservationModal 
-                restaurantName={restaurantName} 
+                restaurantName={restaurantName}
+                restaurantId={restaurantId}
                 show={showModal} 
                 onHide={() => setShowModal(false)} 
                 activeIndex={activeModalIndex}
-                currentPeople={store.currentPeople}/>
+                currentPeople={store.currentPeople}
+                currentDate={store.currentDate}/>
             </div>
         </div>
     )
