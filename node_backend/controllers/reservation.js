@@ -28,3 +28,20 @@ export const submitReservation = (req, res) => {
         }   
     })
 }
+export const getUserReservations = (req, res) =>{
+    const user_id =  req.params.user_id
+
+    const sql = `SELECT * FROM reservation WHERE user_id='${user_id}';`
+    console.log(sql)
+    db.query(sql,(error, results) => {
+        if(error) { 
+            console.log(error)
+            res.send({
+                error: true,
+                message: 'Błąd podczas ładowania rezerwacji'
+            });
+        } else{
+            res.send(JSON.stringify(results));
+        }
+    })
+}

@@ -17,7 +17,7 @@ const RestaurantPage = () => {
   const [restaurant, setRestaurant] = useState(null)
   const [dishes, setDishes] = useState(null)
 
-  console.log('RestaurantsPage rendered. Store: ', store.email, store.username)
+  console.log('RestaurantPage rendered. Store: ', store.email, store.username, store.user_id)
 
   useEffect(() => {
     fetch(`/restaurant/get/${restaurantId}`)

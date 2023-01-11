@@ -1,17 +1,19 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			user_id: null,
 			email: null,
 			username: null,
 			currentLocation: null,
 		},
 		actions: {
-			setUserData: (email, username) => {
+			setUserData: (user_id ,email, username) => {
 				setStore({
+					user_id:user_id,
 					email: email,
 					username: username
 				})
-				console.log('Store set. Values: ', 'email:', email, 'username:', username)
+				console.log('Store set. Values: ', 'email:', email, 'username:', username,'user_id:', user_id)
 			},
 			setCurrentLocation: (location) => {
 				setStore({currentLocation: location})
@@ -20,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const Cookies = require("js-cookie")
 				Cookies.remove('token')
 				setStore({
+					user_id: null,
 					email: null,
 					username: null
 				})

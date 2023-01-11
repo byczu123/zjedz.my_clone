@@ -37,10 +37,11 @@ const LoginForm = () => {
                 console.log('Data from backend: ', data)
                 setErrorMessage(data.message)
                 if (data.token) {
+                    const user_id = data.user_id
                     const username = data.username
                     const email = data.email
                     console.log('Call setUserData in LoginForm')
-                    actions.setUserData(email, username)
+                    actions.setUserData(user_id, email, username)
                 }
             })
     }

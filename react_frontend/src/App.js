@@ -7,6 +7,7 @@ import RestaurantPage from './pages/RestaurantPage';
 import { Context } from './context/appContext';
 import { decodeToken } from "react-jwt"
 import injectContext from './context/appContext';
+import UserPage from './pages/UserPage';
 
 function App() {
   
@@ -14,7 +15,7 @@ function App() {
   const {store, actions} = useContext(Context)
   const token = Cookies.get('token')
   
-  console.log('App rendered ', store.email, store.username)
+  console.log('App rendered ', store.email, store.username, store.user_id)
 
   useEffect(() => {
     async function validateToken() {
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<HomePage/>}/>
         <Route exact path='/restaurant/:restaurant_id' element={<RestaurantPage/>}/>
+        <Route exact path='/profile' element={<UserPage/>}/>
       </Routes>
     </BrowserRouter>
     
