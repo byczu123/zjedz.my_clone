@@ -5,6 +5,26 @@
     align-items: center;
 }
 
+.reservation-summary-params {
+    margin: 5%;
+}
+
+.summary-param {
+    display: flex;
+    justify-content: left;
+    margin: 1%;
+}
+
+.summary-param .param-icon {
+    color: orange;
+    height: 30px;
+    margin-right: 4%;
+}
+
+.summary-param .param-value {
+    font-size: 18px;
+}
+
 #confirm-reservation {
     margin: 5%;
     width: 50%;
@@ -12,4 +32,8 @@
     font-size: 1.5rem;
     border-radius: 60px;
     border: none;
+}
+
+#confirm-reservation:hover {
+    background-color: var(--hover-secondary-color);
 }
