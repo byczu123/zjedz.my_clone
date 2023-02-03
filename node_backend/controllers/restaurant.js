@@ -24,6 +24,20 @@ export const getRestaurants = (req, res) => {
     })
 }
 
+export const getAllRestaurants = (req, res) => {
+    const sql = `SELECT * from restaurant`
+    db.query(sql, (error, results) => {
+        if (error) {
+            console.log(error)
+            res.send({message: "Wystąpił błąd"})
+            return
+        }
+        console.log(results)
+        res.send(JSON.stringify(results))
+        return
+    })
+}
+
 export const getRestaurant = (req, res) => {
     const restaurant_id = req.params.restaurant_id
     const sql = `SELECT restaurant_id, name, location, menu_id, description, link FROM restaurant WHERE restaurant_id='${restaurant_id}';`

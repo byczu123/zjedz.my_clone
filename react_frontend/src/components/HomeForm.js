@@ -3,6 +3,7 @@ import '../styles/HomeForm.css'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Dropdown } from 'react-bootstrap'
 import { Context } from '../context/appContext'
+import SearchBar from './SearchBar'
 
 const HomeForm = () => {
 
@@ -87,13 +88,7 @@ const HomeForm = () => {
             }
           </DropdownButton>
         </div>
-        <div className="home-form-description">
-          <h3>lub wyszukaj</h3>
-          <input placeholder='restauracje...'></input>
-        </div>
-        <div className='home-form-button-container'>
-          <button>Szukaj</button>
-        </div>
+        <SearchBar/> 
       </div>
     </div>
   )

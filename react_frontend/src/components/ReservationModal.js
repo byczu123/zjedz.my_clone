@@ -63,36 +63,41 @@ const ReservationModal = (props) => {
         setActiveButton(event.target.dataset.button)
     }
 
-    useEffect(() => {
-        setDate(store.currentDate)
-        setCurrentPeople(store.currentPeople)
-        setActiveIndex(props.activeIndex)
-        setHour(hours && hours[activeIndex])
-        setActiveButton('reservation-data-button')
-        setHours([])
-        getPossibleHours()
+    useEffect(() => { // po to, by po załadowaniu modala wczytać odpowiednie parametry (ale nie gdy go zamykamy)
+        if (show) {
+            setDate(store.currentDate)
+            setCurrentPeople(store.currentPeople)
+            setActiveIndex(props.activeIndex)
+            setHour(hours && hours[activeIndex])
+            setActiveButton('reservation-data-button')
+            setHours([])
+            getPossibleHours()
+        }
     }, [show])
 
-    useEffect(() => {
-        setDate(store.currentDate)
-    }, [store.currentDate])
+    // useEffect(() => {
+    //     if (show) {
+    //         setDate(store.currentDate)
+    //         setCurrentPeople(store.currentPeople)
+    //         setActiveIndex(props.activeIndex)
+    //     }
+    // }, [show])
 
-    useEffect(() => {
+    useEffect(() => { // po to, by dla każdej wartości currentPeople i date od nowa sprawdzać możliwe godziny
         getPossibleHours()
     }, [currentPeople, date])
 
-    useEffect(() => {
+    useEffect(() => { // po to, by móc sterować widocznością modala z kart
         setShow(props.show)
-        setActiveIndex(props.activeIndex)
-    }, [props.show, props.activeIndex])
+    }, [props.show])
 
-    useEffect(() => {
+    useEffect(() => { // po to, by po załadowaniu modalu była od razu ustawiona godzina w podsumoawniu
         setHour(hours && hours[activeIndex])
     }, [activeIndex, hours])
 
-    useEffect(() => {
-        setCurrentPeople(store.currentPeople)
-    }, [store.currentPeople])
+    // useEffect(() => {
+    //     setCurrentPeople(store.currentPeople)
+    // }, [store.currentPeople])
 
     return (
         <>
