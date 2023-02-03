@@ -70,46 +70,47 @@ const UserReservations = () => {
                 <h1 style={{fontWeight: 300}}>AKTUALNE REZERWACJE</h1>
             </div>
             
-            {reservations && reservations.length > 0 ? reservations.map(reservation => {
-                return <div className='user-reservations-grid'>
-                    <div className='user-reservation-container'>
-                <div className='user-reservation-image'>
-                    <Link to={`/restaurant/${reservation.restaurant_id}`}
-                        state={{
-                            name: reservation.name,
-                            menuId: reservation.menu_id,
-                            location: reservation.location,
-                            description: reservation.description
-                        }}>
-                        <img src={reservation.link}></img>
-                    </Link>
-                    <div className='user-reservation-description'>
-                        <p>{reservation.location}</p>
+            {reservations && reservations.length > 0 ?
+            <div className='user-reservations-grid'>
+                {reservations.map(reservation => {
+                    return <div className='user-reservation-container'>
+                    <div className='user-reservation-image'>
+                        <Link to={`/restaurant/${reservation.restaurant_id}`}
+                            state={{
+                                name: reservation.name,
+                                menuId: reservation.menu_id,
+                                location: reservation.location,
+                                description: reservation.description
+                            }}>
+                            <img src={reservation.link}></img>
+                        </Link>
+                        <div className='user-reservation-description'>
+                            <p>{reservation.location}</p>
+                        </div>
+                    </div>
+                    <div className='user-reservation-name'>
+                        <h2>{reservation.name}</h2>
+                    </div>
+                    <div className='user-reservation-data'>
+                        <div className='user-reservation-data-element'>
+                            <FontAwesomeIcon className='param-icon' icon={faClock}/>
+                            <p>{reservation.hour}</p>
+                        </div>
+                        <div className='user-reservation-data-element'>
+                            <FontAwesomeIcon className='param-icon' icon={faCalendar}/>
+                            <p>{reservation.date}</p>
+                        </div>
+                        <div className='user-reservation-data-element'>
+                            <FontAwesomeIcon className='param-icon' icon={faUser}/>
+                            <p>{reservation.people}</p>
+                        </div>
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <button id="delete-reservation" onClick={() => deleteReservation(reservation.reservation_id)}>ZREZYGNUJ</button>
                     </div>
                 </div>
-                <div className='user-reservation-name'>
-                    <h2>{reservation.name}</h2>
-                </div>
-                <div className='user-reservation-data'>
-                    <div className='user-reservation-data-element'>
-                        <FontAwesomeIcon className='param-icon' icon={faClock}/>
-                        <p>{reservation.hour}</p>
-                    </div>
-                    <div className='user-reservation-data-element'>
-                        <FontAwesomeIcon className='param-icon' icon={faCalendar}/>
-                        <p>{reservation.date}</p>
-                    </div>
-                    <div className='user-reservation-data-element'>
-                        <FontAwesomeIcon className='param-icon' icon={faUser}/>
-                        <p>{reservation.people}</p>
-                    </div>
-                </div>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <button id="delete-reservation" onClick={() => deleteReservation(reservation.reservation_id)}>ZREZYGNUJ</button>
-                </div>
+                })}
             </div>
-            </div>
-            })
             :
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '8%'}}>
                 <h1>Aktualnie nie posiadasz rezerwacji</h1>
