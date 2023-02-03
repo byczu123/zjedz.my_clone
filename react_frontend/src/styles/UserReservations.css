@@ -1,0 +1,7 @@
+.user-reservations-header {
+    height: 30vh;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/XD.jpg");
+    background-size: cover;
+}

@@ -7,6 +7,8 @@ export const submitReservation = (req, res) => {
     const hour = req.body.hour;
     const price = req.body.price;
     const people = req.body.peopleValue;
+
+    console.log('OTRZYMALEM ID', userId)
   
     const checkSql = `SELECT * FROM reservation WHERE restaurant_id='${restaurantId}' AND date='${date}' AND hour='${hour}' AND price='${price}' AND people='${people}' AND user_id IS NOT NULL`;
   
@@ -48,6 +50,23 @@ export const submitReservation = (req, res) => {
       }
     });
   };
+
+export const getReservations = (req, res) => {
+    const username = req.body.username
+    const email = req.body.email
+    let userId = ''
+    const sql = `SELECT id_user FROM user WHERE username = '${username}' AND email = '${email}'`
+    db.query(sql, (error, results) => {
+      if (error) {
+          console.log(error)
+      } else {
+        console.log(results)
+        userId = results[0]
+        console.log('USER ID', userId)
+      }   
+    })
+    
+}
 
 export const getFirstHours = (req, res) => {
     const restaurantId = req.body.restaurantId

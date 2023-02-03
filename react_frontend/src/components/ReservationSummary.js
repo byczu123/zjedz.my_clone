@@ -30,7 +30,7 @@ const ReservationSummary = (props) => {
             price: 500,
             peopleValue: peopleValue,
             restaurantId: restaurantId,
-            userId: 1
+            userId: store.id
           })
         }
 
