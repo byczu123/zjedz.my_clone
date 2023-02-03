@@ -36,6 +36,29 @@ const UserReservations = () => {
             })
     }, [])
 
+    const deleteReservation = (reservationId) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                reservationId: reservationId
+            })
+        }
+        fetch('/reservation/delete-reservation', options)
+            .then(res => {
+                if (res.status === 200) return res.json()
+            })
+            .then(data => {
+                if (data.error === false) {
+                    setReservations(prevReservations => 
+                        prevReservations.filter(reservation => reservation.reservation_id !== reservationId)
+                    );
+                }
+            })
+    }
+
     console.log('User reservations rendered. User data', store.username, store.email, store.id, reservations)
 
     return (
@@ -46,9 +69,10 @@ const UserReservations = () => {
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '2%'}}>
                 <h1 style={{fontWeight: 300}}>AKTUALNE REZERWACJE</h1>
             </div>
-            <div className='user-reservations-grid'>
-            {reservations && reservations.map(reservation => {
-                return <div className='user-reservation-container'>
+            
+            {reservations && reservations.length > 0 ? reservations.map(reservation => {
+                return <div className='user-reservations-grid'>
+                    <div className='user-reservation-container'>
                 <div className='user-reservation-image'>
                     <Link to={`/restaurant/${reservation.restaurant_id}`}
                         state={{
@@ -81,11 +105,17 @@ const UserReservations = () => {
                     </div>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <button id="delete-reservation">ZREZYGNUJ</button>
+                    <button id="delete-reservation" onClick={() => deleteReservation(reservation.reservation_id)}>ZREZYGNUJ</button>
                 </div>
             </div>
-            })}
             </div>
+            })
+            :
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: '8%'}}>
+                <h1>Aktualnie nie posiadasz rezerwacji</h1>
+            </div>
+            }
+            
         </div>
     )
 }

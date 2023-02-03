@@ -73,6 +73,26 @@ export const getReservations = (req, res) => {
   })
 }
 
+export const deleteReservation = (req, res) => {
+    const reservationId = req.body.reservationId
+    const sql = `UPDATE reservation SET user_id = NULL WHERE reservation_id = '${reservationId}'`;
+    db.query(sql, (error, results) => {
+      if (error) {
+          console.log(error)
+          res.send({
+              error: true,
+              message: `Wystąpił błąd podczas usuwania rezerwacji`
+              
+          });
+      } else {
+          res.send({
+              error: false,
+              message: `Rezerwacja ${reservationId} usunięta`,
+          });
+      }   
+    })
+}
+
 export const getFirstHours = (req, res) => {
     const restaurantId = req.body.restaurantId
     const currentDate = req.body.currentDate
