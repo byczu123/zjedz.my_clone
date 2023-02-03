@@ -53,7 +53,10 @@ export const submitReservation = (req, res) => {
 
 export const getReservations = (req, res) => {
     const userId = req.body.userId
-    const sql = `SELECT reservation.*, restaurant.* FROM reservation JOIN restaurant ON 
+    const sql = `SELECT reservation.reservation_id, reservation.date, reservation.hour, reservation.people, 
+    restaurant.link, restaurant.name, restaurant.location, restaurant.restaurant_id
+    FROM reservation 
+    JOIN restaurant ON 
     reservation.restaurant_id = restaurant.restaurant_id WHERE reservation.user_id = '${userId}'`
     db.query(sql, (error, results) => {
       if (error) {

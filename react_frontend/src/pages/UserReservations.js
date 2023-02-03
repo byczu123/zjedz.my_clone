@@ -75,13 +75,7 @@ const UserReservations = () => {
                 {reservations.map(reservation => {
                     return <div className='user-reservation-container'>
                     <div className='user-reservation-image'>
-                        <Link to={`/restaurant/${reservation.restaurant_id}`}
-                            state={{
-                                name: reservation.name,
-                                menuId: reservation.menu_id,
-                                location: reservation.location,
-                                description: reservation.description
-                            }}>
+                        <Link to={`/restaurant/${reservation.restaurant_id}`}>
                             <img src={reservation.link}></img>
                         </Link>
                         <div className='user-reservation-description'>
@@ -113,7 +107,7 @@ const UserReservations = () => {
             </div>
             :
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '8%'}}>
-                <h1>Aktualnie nie posiadasz rezerwacji</h1>
+                {/* <h1>Aktualnie nie posiadasz rezerwacji</h1> */}
             </div>
             }
             
