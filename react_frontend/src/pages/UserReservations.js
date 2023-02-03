@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { Context } from '../context/appContext'
 import '../styles/UserReservations.css'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock, faCalendar, faHouse, faUsers, faUser, faXmark, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const UserReservations = () => {
 
     const { store, actions } = useContext(Context)
+    const [reservations, setReservations] = useState(null)
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -21,8 +24,7 @@ const UserReservations = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: store.username,
-                email: store.email
+                userId: store.id
             })
         }
         fetch('/reservation/user-reservations', options)
@@ -30,11 +32,11 @@ const UserReservations = () => {
                 if (res.status === 200) return res.json()
             })
             .then(data => {
-                console.log(data)
+                setReservations(data.reservations)
             })
     }, [])
 
-    console.log('User reservations rendered. User data', store.username, store.email, store.id)
+    console.log('User reservations rendered. User data', store.username, store.email, store.id, reservations)
 
     return (
         <div className='user-reservations-container'>
@@ -44,28 +46,46 @@ const UserReservations = () => {
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '2%'}}>
                 <h1 style={{fontWeight: 300}}>AKTUALNE REZERWACJE</h1>
             </div>
-            <div className='restaurant-container'>
-            <div className='restaurant-image-container'>
-                <div className='restaurant-image-description'>
-                    {/* <p>{restaurantLocation}</p> */}
+            <div className='user-reservations-grid'>
+            {reservations && reservations.map(reservation => {
+                return <div className='user-reservation-container'>
+                <div className='user-reservation-image'>
+                    <Link to={`/restaurant/${reservation.restaurant_id}`}
+                        state={{
+                            name: reservation.name,
+                            menuId: reservation.menu_id,
+                            location: reservation.location,
+                            description: reservation.description
+                        }}>
+                        <img src={reservation.link}></img>
+                    </Link>
+                    <div className='user-reservation-description'>
+                        <p>{reservation.location}</p>
+                    </div>
+                </div>
+                <div className='user-reservation-name'>
+                    <h2>{reservation.name}</h2>
+                </div>
+                <div className='user-reservation-data'>
+                    <div className='user-reservation-data-element'>
+                        <FontAwesomeIcon className='param-icon' icon={faClock}/>
+                        <p>{reservation.hour}</p>
+                    </div>
+                    <div className='user-reservation-data-element'>
+                        <FontAwesomeIcon className='param-icon' icon={faCalendar}/>
+                        <p>{reservation.date}</p>
+                    </div>
+                    <div className='user-reservation-data-element'>
+                        <FontAwesomeIcon className='param-icon' icon={faUser}/>
+                        <p>{reservation.people}</p>
+                    </div>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <button id="delete-reservation">ZREZYGNUJ</button>
                 </div>
             </div>
-            <div className='restaurant-description'>
-                <h2 className='restaurant_name'></h2>
-                <h3>Rezerwacja stolika</h3>
-                <h4>najbliższe godziny  dla  osób</h4>
+            })}
             </div>
-            <div className='restaurant-hours-container'>
-                <div className='restaurant-hours'>
-                    
-                </div>
-            </div>
-            <div className='restaurant-link-container'>
-                <Link className='restaurant_link'>
-                    ZAREZERWUJ
-                </Link> 
-            </div>
-        </div>
         </div>
     )
 }

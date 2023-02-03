@@ -52,20 +52,25 @@ export const submitReservation = (req, res) => {
   };
 
 export const getReservations = (req, res) => {
-    const username = req.body.username
-    const email = req.body.email
-    let userId = ''
-    const sql = `SELECT id_user FROM user WHERE username = '${username}' AND email = '${email}'`
+    const userId = req.body.userId
+    const sql = `SELECT reservation.*, restaurant.* FROM reservation JOIN restaurant ON 
+    reservation.restaurant_id = restaurant.restaurant_id WHERE reservation.user_id = '${userId}'`
     db.query(sql, (error, results) => {
       if (error) {
           console.log(error)
+          res.send({
+              error: true,
+              message: `Wystąpił błąd podczas wyświetlania rezerwacji dla ${userId}.`
+          });
       } else {
-        console.log(results)
-        userId = results[0]
-        console.log('USER ID', userId)
+          console.log(results)
+          res.send({
+              error: false,
+              message: 'Rezerwacje pobrane',
+              reservations: results
+          });
       }   
-    })
-    
+  })
 }
 
 export const getFirstHours = (req, res) => {
