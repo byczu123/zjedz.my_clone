@@ -84,7 +84,7 @@ export const login = (req, res) => {
                     const secret = process.env.JWT_SECRET
                     console.log(secret)
                     const payload = {
-                        id: result.id,
+                        id: result.id_user,
                         username: result.username,
                         email: result.email,
                     }
@@ -97,6 +97,7 @@ export const login = (req, res) => {
                         token: token,
                         username: result.username,
                         email: result.email,
+                        id: result.id_user,
                         message: "Użytkownik zalogowany pomyślnie"
                     })
                 }

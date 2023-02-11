@@ -26,7 +26,8 @@ function Navbar() {
                 store.email && store.username ?
                     <div className='right-section'>
                         <p>hello,&nbsp;</p><p id='username'>{store.username}</p>
-                        <Link className='navbar-link' onClick={actions.logout}>Log out</Link>
+                        <Link className='navbar-link' to='/reservations'>Twoje rezerwacje</Link>
+                        <Link className='navbar-link' onClick={actions.logout}>Wyloguj</Link>
                     </div>
                     :
                     <div className='right-section'>

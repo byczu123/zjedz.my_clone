@@ -1,9 +1,6 @@
 import { React, useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { Context } from '../context/appContext';
 import '../styles/RestaurantPanel.css'
-import restaurantLogo from '../assets/cojes.jpg'
-import ReservationModal from './ReservationModal';
 import RestaurantCard from './RestaurantCard';
 
 const RestaurantPanel = (props) => {
@@ -11,25 +8,19 @@ const RestaurantPanel = (props) => {
     const { store, actions } = useContext(Context)
     const [restaurants, setRestaurants] = useState(null)
 
-    const currentLocation = props.currentLocation
-    const currentHour = props.currentHour
-    const currentDate = props.currentDate
-    const currentPeople = props.currentPeople
-
-    console.log('RestaurantsPanel rendered. Params: ', currentLocation, currentHour, currentDate, currentPeople)
+    console.log('RestaurantsPanel rendered. Params: ', store.currentLocation, store.currentHour, store.currentDate, store.currentPeople)
 
     useEffect(() => {
-
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                currentDate: currentDate,
-                currentHour: currentHour,
-                currentPeople: currentPeople,
-                currentLocation: currentLocation
+                currentDate: store.currentDate,
+                currentHour: store.currentHour,
+                currentPeople: store.currentPeople,
+                currentLocation: store.currentLocation
             })
         }
         fetch('/restaurant/get', options)
@@ -38,7 +29,7 @@ const RestaurantPanel = (props) => {
             })
             .then(data => {
                 setRestaurants(data)
-                console.log('Restaurants: ', data)
+                console.log('RestaurantPanel pobiera restauracje: ', data)
             })
     }, [store.currentLocation, store.currentDate, store.currentHour, store.currentPeople]);
 

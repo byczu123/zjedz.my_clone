@@ -39,8 +39,9 @@ const LoginForm = () => {
                 if (data.token) {
                     const username = data.username
                     const email = data.email
+                    const id = data.id
                     console.log('Call setUserData in LoginForm')
-                    actions.setUserData(email, username)
+                    actions.setUserData(email, username, id)
                 }
             })
     }

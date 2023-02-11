@@ -1,0 +1,78 @@
+.search-bar-description {
+    text-align: center;
+}
+
+.search-bar-description h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: white;
+    margin: 3%;
+}
+
+.search-bar-description input {
+    width: 55%;
+    border: 0.5px solid gray;
+    padding: 0.5rem;
+    border-radius: 100px;
+    outline: none;
+    background: transparent;
+    font-size: 1.2rem;
+    color: gray;
+    font-weight: 300;
+    backdrop-filter: blur(2px) saturate(100%);
+}
+
+.search-bar-description input::placeholder {
+    color: gray;
+    font-size: 1.2rem;
+}
+
+.search-bar-description input:focus {
+    border: 0.5px solid var(--secondary-text-color);
+    color: white;
+}
+.search-bar-description input:focus::placeholder {
+    color: white;
+} 
+
+.searchbar-button-container {
+    margin-top: calc(var(--home-header-size) / 10);
+    display: flex;
+    justify-content: center;
+}
+
+.searchbar-button-container button {
+    width: 40%;
+    border: 0;
+    border-radius: 100px;
+    background-color: var(--secondary-text-color);
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.searchbar-button-container button:hover {
+    background-color: var(--hover-secondary-color);
+}
+
+.search-bar-container {
+    position: relative;
+}
+
+.searchbar-dropdown {
+    position: absolute;
+    width: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.searchbar-dropdown-item {
+    padding: 10px;
+}
+
+.searchbar-dropdown-item:hover {
+    background-color: lightgray;
+    border-radius: 10px;
+}
