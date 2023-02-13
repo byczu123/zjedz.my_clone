@@ -60,7 +60,7 @@ const RestaurantPage = () => {
             <Navbar />
             <div className='info-container'>
               <h1 className='restaurant-name'>{restaurant[0].name}</h1>
-              <p className='desc'>U nas zjesz zajebiście</p>
+              <p className='desc'>U nas zjesz dobrze!</p>
               <p className='location'>{restaurant[0].location}</p>
               <ul className='list'>
                 <li><a >Menu</a></li>
@@ -79,7 +79,7 @@ const RestaurantPage = () => {
                     ZAREZERWUJ
                 </Link> 
                 <ReservationModal 
-                restaurantName={restaurantName}
+                restaurantName={restaurant[0].name}
                 restaurantId={restaurantId}
                 show={showModal} 
                 onHide={() => setShowModal(false)} 
@@ -87,8 +87,8 @@ const RestaurantPage = () => {
                 currentPeople={store.currentPeople}
                 currentDate={store.currentDate}/>
             </div>
-              <Link to={`facebook.com/${restaurant.name}`}><FaFacebookF className='fb'/></Link>
-              <Link to={`instagram.com/${restaurant.name}`}><FaInstagram className='ig'/></Link>
+              <Link to={`facebook.com/${restaurant[0].name}`}><FaFacebookF className='fb'/></Link>
+              <Link to={`instagram.com/${restaurant[0].name}`}><FaInstagram className='ig'/></Link>
           </div>
 
           <div className='about-container'>
