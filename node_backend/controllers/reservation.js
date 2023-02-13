@@ -12,44 +12,65 @@ export const submitReservation = (req, res) => {
   
     const checkSql = `SELECT * FROM reservation WHERE restaurant_id='${restaurantId}' AND date='${date}' AND hour='${hour}' AND price='${price}' AND people='${people}' AND user_id IS NOT NULL`;
   
-    db.query(checkSql, (error, results) => {
+    db.query('START TRANSACTION', (error, results) => {
       if (error) {
-        console.log(error);
+        console.log(error)
         res.send({
           error: true,
-          message: "Wystąpił błąd podczas sprawdzania rezerwacji."
+          message: "Wystąpił błąd podczas rozpoczynania transakcji"
         });
       } else {
-        if (results.length > 0) {
-          res.send({
-            error: true,
-            message: "Rezerwacja nie jest już dostepna."
-          });
-        } else {
-          const updateSql = `UPDATE reservation
-          SET user_id='${userId}'
-          WHERE restaurant_id='${restaurantId}' AND date='${date}' AND hour='${hour}' AND price='${price}' AND people='${people}'`;
-  
-          db.query(updateSql, (error, results) => {
-            if (error) {
-              console.log(error);
+        db.query(checkSql, (error, results) => {
+          if (error) {
+            console.log(error);
+            db.query('ROLLBACK', () => {});
+            res.send({
+              error: true,
+              message: "Wystąpił błąd podczas sprawdzania rezerwacji."
+            });
+          } else {
+            if (results.length > 0) {
+              db.query('ROLLBACK', () => {});
               res.send({
                 error: true,
-                message: "Wystąpił błąd podczas rezerwacji."
+                message: "Rezerwacja nie jest już dostępna."
               });
             } else {
-              console.log(results);
-              res.send({
-                error: false,
-                message: "Rezerwacja zatwierdzona.",
-                registered: true
-              });
+              const updateSql = `UPDATE reservation
+              SET user_id='${userId}'
+              WHERE restaurant_id='${restaurantId}' AND date='${date}' AND hour='${hour}' AND price='${price}' AND people='${people}'`
+              db.query(updateSql, (error, results) => {
+                if (error) {
+                  console.log(error);
+                  db.query('ROLLBACK', () => {});
+                  res.send({
+                    error: true,
+                    message: "Wystąpił błąd podczas rezerwacji."
+                  });
+                } else {
+                  db.query('COMMIT', (error) => {
+                    if (error) {
+                      console.log(error);
+                      res.send({
+                        error: true
+                      });
+                    } else {
+                      console.log(results);
+                      res.send({
+                        error: false,
+                        message: "Rezerwacja zatwierdzona.",
+                        registered: true
+                      });
+                    }
+                  })
+                }
+              })
             }
-          });
-        }
+          }
+        })
       }
     });
-  };
+}
 
 export const getReservations = (req, res) => {
     const userId = req.body.userId
