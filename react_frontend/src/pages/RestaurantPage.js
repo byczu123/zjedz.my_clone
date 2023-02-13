@@ -3,6 +3,8 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { Context } from '../context/appContext'
 import '../styles/RestaurantPage.css'
 import Navbar from '../components/Navbar'
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import ReservationModal from '../components/ReservationModal'
 
 
 const RestaurantPage = () => {
@@ -12,12 +14,19 @@ const RestaurantPage = () => {
   const params = useParams()
   const location = useLocation()
   const restaurantId = params && params.restaurant_id
+  const restaurantName = location.state && location.state.restaurantName
   const menuId = location.state && location.state.menuId
+  const [showModal, setShowModal] = useState(false)
 
   const [restaurant, setRestaurant] = useState(null)
   const [dishes, setDishes] = useState(null)
-
-  console.log('RestaurantsPage rendered. Store: ', store.email, store.username)
+  
+  const handleModal = (index) => {
+    setShowModal(true)
+    setActiveModalIndex(index)
+  }
+  const [activeModalIndex, setActiveModalIndex] = useState(null)
+  console.log('RestaurantsPage rendered. Store: ', store.email, store.username, menuId)
 
   useEffect(() => {
     fetch(`/restaurant/get/${restaurantId}`)
@@ -32,7 +41,7 @@ const RestaurantPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`/menu/dishes/${menuId}`)
+    fetch(`/menu/dishes/${restaurantId}`)
       .then(res => {
         if (res.status === 200) return res.json()
       })
@@ -65,25 +74,21 @@ const RestaurantPage = () => {
           </div>
           <div className='reservation-container'>
             <p className='title'>{restaurant[0].name}</p>
-            <p>Rezerwacja stolika</p>
-            <p>najbliższe godziny dziś:</p>
-            <div className='restaurant-hours-container'>
-              <div className='restaurant-hours'>
-                <button className='restaurant-hour-button'>
-                  14:30
-                </button>
-                <button className='restaurant-hour-button'>
-                  15:00
-                </button>
-                <button className='restaurant-hour-button'>
-                  15:30
-                </button>
-                <button className='restaurant-hour-button'>
-                  16:00
-                </button>
-              </div>
+            <div className='helper'>
+                <Link className='restaurant_link1' onClick={() => handleModal(0)}>
+                    ZAREZERWUJ
+                </Link> 
+                <ReservationModal 
+                restaurantName={restaurantName}
+                restaurantId={restaurantId}
+                show={showModal} 
+                onHide={() => setShowModal(false)} 
+                activeIndex={activeModalIndex}
+                currentPeople={store.currentPeople}
+                currentDate={store.currentDate}/>
             </div>
-            <button className='reservation-button'>Zarezerwuj</button>
+              <Link to={`facebook.com/${restaurant.name}`}><FaFacebookF className='fb'/></Link>
+              <Link to={`instagram.com/${restaurant.name}`}><FaInstagram className='ig'/></Link>
           </div>
 
           <div className='about-container'>
@@ -92,6 +97,9 @@ const RestaurantPage = () => {
               return <div className='dish-container' key={index}>
                 <h5 className='dish-name'>{dish.name}</h5> <p className='price'>{dish.price}zł/szt.</p></div>
             }) : null}
+          </div>
+          <div className='foto-container'>
+
           </div>
         </div>
       </>
